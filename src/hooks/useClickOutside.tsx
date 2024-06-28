@@ -15,7 +15,7 @@ const useClickOutside = (callback: () => { payload: void; type: string; } | null
     return () => {
       document.removeEventListener("click", handleClick, true);
     };
-  }, [ref]);
+  }, [ref, callback]);
 
   return ref as RefObject<HTMLDivElement>;
 };

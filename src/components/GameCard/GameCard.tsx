@@ -216,4 +216,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
   );
 });
 
+GameCard.displayName = 'GameCard';
+
+
 export default GameCard;

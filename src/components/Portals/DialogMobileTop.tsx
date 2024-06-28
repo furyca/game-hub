@@ -57,9 +57,9 @@ const DialogMobileTop = () => {
             <HeadLink name="Browse" url="/" />
           </div>
           <ul>
-            {browseLinks.map((item) => {
+            {browseLinks.map((item, index) => {
               return (
-                <div className="text-[18px] py-[6px] leading-5">
+                <div className="text-[18px] py-[6px] leading-5" key={index}>
                   <Link href={item.url as string} >{item.name}</Link>
                 </div>
               );
