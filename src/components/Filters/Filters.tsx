@@ -8,22 +8,29 @@ import { ordersLong } from "@/lists/orderingLists";
 import { platformsShort } from "@/lists/platformLists";
 import { setPortal } from "@/lib/features/portals/portalslice";
 import { createPortal } from "react-dom";
-import { releaseDates } from "@/lists/releaseDates";
+import { ALL_TIMES, releaseDates } from "@/lists/releaseDates";
 
 const Filters = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
   const { activePortal } = useAppSelector(({ portal }) => portal);
-  const { order, platform, date } = useAppSelector(({ filter }) => filter);
+  const {
+    filter: {
+      platforms: { name: platform_name },
+      parent_platforms: { name: parent_platform_name },
+      dates: { name: date_name, value: date_value },
+      ordering: { name: order_name },
+    },
+  } = useAppSelector(({ data }) => data);
   const dispatch = useAppDispatch();
   const orderRef = useRef<HTMLLIElement>(null);
   const platformRef = useRef<HTMLLIElement>(null);
-  const dateRef = useRef<HTMLLIElement>(null);
+  const dateRef = useRef<HTMLLIElement>(null);  
 
   return (
     <div className="flex justify-between overflow-x-auto">
       <ul className="flex gap-2 items-center h-[55px]">
-        <li onClick={() => dispatch(setPortal("order"))} ref={orderRef}>
-          <FilterOption span1="Order by:" span2={order || ""} type="order" />
+        <li onClick={() => dispatch(setPortal("order"))} ref={orderRef} className={`${order_name ? "" : "hidden"}`}>
+          <FilterOption span1="Order by:" span2={order_name || ""} type="order" />
           {activePortal === "order" &&
             createPortal(
               <PortalContainer
@@ -37,8 +44,12 @@ const Filters = () => {
               document.body
             )}
         </li>
-        <li onClick={() => dispatch(setPortal("date"))} ref={dateRef} className="hidden">
-          <FilterOption span1="Release Date:" span2={date || ""} type="date"/>
+        <li
+          onClick={() => dispatch(setPortal("date"))}
+          ref={dateRef}
+          className={`${date_name ? "" : "hidden"}`}
+        >
+          <FilterOption span1="Release Date:" span2={date_name || ""} type="date" />
           {activePortal === "date" &&
             createPortal(
               <PortalContainer
@@ -53,7 +64,7 @@ const Filters = () => {
             )}
         </li>
         <li onClick={() => dispatch(setPortal("platform"))} ref={platformRef}>
-          <FilterOption span1={platform ? platform : "Platforms"} span2="" type="platform" />
+          <FilterOption span1={platform_name ? platform_name : parent_platform_name ? parent_platform_name : "Platforms"} span2="" type="platform" />
           {activePortal === "platform" &&
             createPortal(
               <PortalContainer

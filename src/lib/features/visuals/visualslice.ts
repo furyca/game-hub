@@ -21,7 +21,6 @@ export const visualSlice = createSlice({
 
 export const { masonryOn, masonryOff } = visualSlice.actions;
 
-// Other code such as selectors can use the imported `RootState` type
 export const setMasonry = (state: RootState) => state.visual.masonry;
 
 export default visualSlice.reducer;

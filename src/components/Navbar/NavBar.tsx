@@ -36,9 +36,9 @@ const NavBar = () => {
             </button>
           </div>
           <div className="gap-4 font-medium hidden lg:flex text-sm pb-1">
-            <NavBarLink text="LOG IN" url="/login" />
-            <NavBarLink text="SIGN UP" url="/signup" />
-            <NavBarLink text="API" url="/apidocs" />
+            <NavBarLink text="LOG IN" url="/" />
+            <NavBarLink text="SIGN UP" url="/" />
+            <NavBarLink text="API" url="/" />
             <div onMouseEnter={() => setDropdownActive(true)} ref={dropdownRef}>
               <FontAwesomeIcon icon={faEllipsis} size="xl" width={16} height={16} />
             </div>

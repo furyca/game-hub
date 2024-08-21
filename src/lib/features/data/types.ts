@@ -1,16 +1,32 @@
 import { GameProps } from "@/components/Main/types";
 
 export type FilterProps = {
-  parent_platforms: number | null;
-  platforms: number | null;
-  dates: string | null;
-  ordering: string | null;
+  parent_platforms: {
+    id: number | null;
+    name: string | null;
+    value: number | null;
+  };
+  platforms: {
+    id: number | null;
+    name: string | null;
+    value: number | null;
+  };
+  dates: {
+    name: string | null;
+    value: string | null;
+  };
+  ordering: {
+    name: string | null;
+    value: string | null;
+  };
 };
 
 export type DataState = {
   games: GameProps[];
   filter: FilterProps;
+  isCalendar: boolean,
   haveNext: boolean;
+  activeQuery: string | null;
   page: number;
   loading: "idle" | "pending";
   loadingMore: "idle" | "pending";

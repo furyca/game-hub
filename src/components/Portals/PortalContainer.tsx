@@ -3,11 +3,10 @@ import ListItem from "./ListItem";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { clearPortal } from "@/lib/features/portals/portalslice";
 import { nanoid } from "nanoid";
-import { setDateName, setPlatformName } from "@/lib/features/filters/filterslice";
-import { setDates, setParentPlatforms, setPlatforms } from "@/lib/features/data/dataSlice";
+import { clearDates, clearAllPlatforms, setDates, setParentPlatforms } from "@/lib/features/data/dataSlice";
 import { PortalProps } from "./types";
 
-const PortalContainer = ({ list, styles, secondary, parentVal, parentName }: PortalProps) => {
+const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentName }: PortalProps) => {
   const dispatch = useAppDispatch();
   const { activePortal } = useAppSelector(({ portal }) => portal);
   const { filter } = useAppSelector(({ data }) => data);
@@ -22,34 +21,21 @@ const PortalContainer = ({ list, styles, secondary, parentVal, parentName }: Por
   };
 
   const clearSelection = () => {
-    switch (activePortal) {
-      case "date":
-        dispatch(setDateName(null));
-        dispatch(setDates(null));
-        break;
-      case "platform":
-        dispatch(setPlatformName(null));
-        dispatch(setPlatforms(null));
-        dispatch(setParentPlatforms(null));
-        break;
-      default:
-        break;
+    if (activePortal === "date") {
+      dispatch(clearDates());
+    }
+    else if (activePortal === "platform") {
+      dispatch(clearAllPlatforms());
     }
   };
 
+  //when selecting from Select All button
   const selectParent = () => {
-    switch (activePortal) {
-      case "date":
-        dispatch(setDateName(parentName));
-        dispatch(setDates(parentVal));
-        break;
-      case "platform":
-        dispatch(setPlatformName(parentName));
-        dispatch(setPlatforms(null));
-        dispatch(setParentPlatforms(parentVal));
-        break;
-      default:
-        break;
+    if (activePortal === "date") {
+      dispatch(setDates({parentName, parentVal}));
+    }
+    else if (activePortal === "platform") {
+      dispatch(setParentPlatforms({parentID, parentName, parentVal}));
     }
   };
 

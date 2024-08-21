@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 export async function GET(req: NextRequest) {
   const apiKey = process.env.NEXT_PUBLIC_API_KEY;
   const { search } = new URL(req.url);
-  let apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/games?key=${apiKey}&${search}`;  
-
+  let apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/games${search}&key=${apiKey}`;
+    
   try {
     const response = await fetch(apiUrl);
 

@@ -1,32 +1,24 @@
 "use client";
 import Link from "next/link";
-import MenuItem from "./MenuItem";
-import { nanoid } from "nanoid";
-import { useEffect, useState } from "react";
-import ShowHide from "./ShowHide";
 import { SubMenuProps } from "./types";
-import { MenuItemProps } from "@/lists/types";
+import { useState } from "react";
+import MenuItem from "./MenuItem";
+import ShowHide from "./ShowHide";
 
 const SubMenu = ({ header, data, url }: SubMenuProps) => {
-  const [longList, setLongList] = useState(false);
   const [list, setList] = useState(data.short);
-  const haveLong = () => {
-    return data.long ? true : false;
-  };
-
-  useEffect(() => {
-    setList(haveLong() && longList ? (data.long as MenuItemProps[]) : data.short);
-  }, [longList]);
+  const haveLong = () => data.long ? true : false;
 
   const toggleExpand = () => {
-    setLongList((prevList) => !prevList);
+    setList(list === data.short ? data.long! : data.short);
   };
 
   return (
     <div>
-      {url ? (
+      {/* if the url is more than a "/" */}
+      {url.length > 1 ? (
         <Link
-          href={url as string}
+          href={url}
           className="text-[18px] lg:text-2xl font-bold lg:mb-4 block leading-7 transition-all duration-200 hover:opacity-40"
         >
           {header}
@@ -35,14 +27,12 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
         <h1 className="text-[18px] lg:text-2xl font-bold lg:mb-4 leading-7">{header}</h1>
       )}
       <ul className="lg:mb-6">
-        {list.map((item) => {
-          return (
-            <li key={nanoid()} className="text-sm mb-2 lg:text-base">
-              <MenuItem name={item.name} url={item.url} viewBox={item.viewBox} d={item.d} />
-            </li>
-          );
-        })}
-        {haveLong() && <ShowHide longList={longList} handleCollapse={toggleExpand} />}
+        {list.map((item, index) => (
+          <li key={index} className="text-sm mb-2 lg:text-base">
+            <MenuItem name={item.name} filter={item.filter} url={item.url} icon={item.icon} />
+          </li>
+        ))}
+        {haveLong() && <ShowHide longList={list === data.long} handleCollapse={toggleExpand} />}
       </ul>
     </div>
   );

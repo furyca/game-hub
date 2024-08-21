@@ -1,3 +1,6 @@
+export const ALL_TIMES: string = "1950-01-01,2024-12-31";
+export const CURRENT_YEAR: string = "2024-01-01,2024-12-31";
+
 export const date20s = [
   {
     name: "2024",

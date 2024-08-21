@@ -6,7 +6,7 @@ import Link from "next/link";
 import { memo, useEffect, useRef, useState } from "react";
 import { platformsIcons } from "./helpers/platformIcons";
 import { getRankIcon } from "./helpers/getRankIcon";
-import { formatDate } from "./helpers/formatDate";
+import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
 import { nanoid } from "nanoid";
 
@@ -159,7 +159,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                 <Image
                   src={getRankIcon(game.rating_top)}
                   alt={game.rating_top.toString()}
-                  className={`${game.rating_top === 5 ? "w-[30px] h-[30px]" : "w-[22px] h-[22px]" } inline align-bottom`}
+                  className={`${game.rating_top === 5 ? "w-[30px] h-[30px]" : "w-[22px] h-[22px]"} inline align-bottom`}
                   width={30}
                   height={30}
                 />
@@ -192,7 +192,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
           <ul>
             <li className="hidden group-hover/card:flex justify-between py-3 text-xs border-b border-white/10">
               <span className="flex text-white/40">Release Date:</span>
-              <span>{formatDate(game.released)}</span>
+              <span>{formatReleaseDate(game.released)}</span>
             </li>
             <li className="hidden group-hover/card:flex justify-between py-3 text-xs border-b border-white/10">
               <span className="flex text-white/40">Genres:</span>
@@ -208,7 +208,12 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
             className="bg-white/10 text-white transition-all duration-300 w-full justify-between text-sm py-3 px-4 mt-4 rounded-lg hidden group-hover/card:flex hover:text-[#fad860]"
           >
             <span className="">Show more like this:</span>
-            <Image src="/arrow.svg" alt="" className="opacity-20 w-3 h-[18px]" height={18} width={12} />
+            <svg viewBox="0 0 19 35" width="12" height="18" xmlns="http://www.w3.org/2000/svg" className="opacity-20 w-3 h-[18px]">
+              <path
+                d="M18.414 16.476l-15-15A2 2 0 10.586 4.304L14.172 17.89.586 31.476a2 2 0 102.828 2.828l15-15a2 2 0 000-2.828z"
+                fill="#FFF"
+              />
+            </svg>
           </Link>
         </div>
       </div>
@@ -216,7 +221,6 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
   );
 });
 
-GameCard.displayName = 'GameCard';
-
+GameCard.displayName = "GameCard";
 
 export default GameCard;

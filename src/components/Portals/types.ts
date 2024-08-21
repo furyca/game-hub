@@ -4,6 +4,7 @@ export type PortalProps = {
   list: ListProps[];
   styles?: StyleProps;
   secondary?: boolean;
+  parentID?: number | undefined
   parentVal?: string | number;
   parentName?: string;
 };

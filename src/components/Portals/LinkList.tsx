@@ -11,12 +11,12 @@ const LinkList = ({ mouseLeave, styles }: { mouseLeave: MouseEventHandler<HTMLDi
       onMouseLeave={mouseLeave}
     >
       <div className="py-5 px-[10px]">
-        <DropdownItem text="Leaderboard" url="/leaderboard" />
-        <DropdownItem text="Discord" url="" />
-        <DropdownItem text="@rawgtheworld" url="" />
-        <DropdownItem text="@rawgthepictures" url="" />
-        <DropdownItem text="Get an API key" url="" />
-        <DropdownItem text="Sitemap" url="" />
+        <DropdownItem text="Leaderboard" url="/" />
+        <DropdownItem text="Discord" url="/" />
+        <DropdownItem text="@rawgtheworld" url="/" />
+        <DropdownItem text="@rawgthepictures" url="/" />
+        <DropdownItem text="Get an API key" url="/" />
+        <DropdownItem text="Sitemap" url="/" />
       </div>
     </div>
   );

@@ -1,16 +1,18 @@
 import useClickOutside from "@/hooks/useClickOutside";
 import { clearDialog } from "@/lib/features/portals/portalslice";
 import { useAppDispatch } from "@/lib/hooks";
-import HeadLink from "../Menu/HeadLink";
+// import HeadLink from "../Menu/HeadLink";
 import RateTop from "../Navbar/RateTop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { browseLinks } from "@/lists/menuLinks";
 import Link from "next/link";
+import useClearSearch from "@/hooks/useClearSearch";
 
 const DialogMobileTop = () => {
   const dispatch = useAppDispatch();
+  const { clearSearch } = useClearSearch();
 
   const outDiv = useClickOutside(() => {
     return dispatch(clearDialog());
@@ -25,16 +27,29 @@ const DialogMobileTop = () => {
         <div className="flex justify-between">
           <div>
             <div className="mb-6 font-bold text-2xl">
-              <HeadLink name="Home" url="/" />
+              <Link
+                href="/"
+                onClick={clearSearch}
+                className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+              >
+                Home
+              </Link>
+              {/* <HeadLink name="Home" url="/" filterOpt={clearSearch} /> */}
             </div>
             <div className="flex bg-white rounded  border text-black text-[18px] leading-none justify-between items-center  mb-2 me-2">
               <RateTop />
             </div>
             <div className="mb-6 font-bold text-2xl">
-              <HeadLink name="Reviews" url="/" />
+              <Link
+                href="/"
+                className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+              >
+                Reviews
+              </Link>
+              {/* <HeadLink name="Reviews" url="/" filterOpt={undefined} /> */}
             </div>
           </div>
-          <div className="flex flex-col items-center gap-2" >
+          <div className="flex flex-col items-center gap-2">
             <div onClick={() => dispatch(clearDialog())}>
               <FontAwesomeIcon icon={faXmark} size="2xl" />
             </div>
@@ -54,25 +69,49 @@ const DialogMobileTop = () => {
         </div>
         <div>
           <div className="mb-4 font-bold text-2xl">
-            <HeadLink name="Browse" url="/" />
+            <Link
+              href="/browse"
+              className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+            >
+              Browse
+            </Link>
+            {/* <HeadLink name="Browse" url="/browse" filterOpt={undefined} /> */}
           </div>
           <ul>
             {browseLinks.map((item, index) => {
               return (
                 <div className="text-[18px] py-[6px] leading-5" key={index}>
-                  <Link href={item.url as string} >{item.name}</Link>
+                  <Link href={item.url as string}>{item.name}</Link>
                 </div>
               );
             })}
           </ul>
           <div className="mb-5 mt-2 font-bold text-2xl">
-            <HeadLink name="API" url="/" />
+          <Link
+              href="/"
+              className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+            >
+              API
+            </Link>
+            {/* <HeadLink name="API" url="/" filterOpt={undefined} /> */}
           </div>
           <div className="mb-5 font-bold text-2xl">
-            <HeadLink name="Get an API key" url="/" />
+          <Link
+              href="/"
+              className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+            >
+              Get an API key
+            </Link>
+            {/* <HeadLink name="Get an API key" url="/" filterOpt={undefined} /> */}
           </div>
           <div className="mb-5 font-bold text-2xl">
-            <HeadLink name="Sitemap" url="/" />
+          <Link
+              href="/"
+              className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+            >
+              Sitemap
+            </Link>
+            {/* <HeadLink name="Sitemap" url="/" filterOpt={undefined} /> */}
           </div>
         </div>
       </div>

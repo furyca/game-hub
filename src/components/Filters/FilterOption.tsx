@@ -3,9 +3,18 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const FilterOption = ({ span1, span2, type }: { span1: string; span2: string; type: string }) => {
-  const { platform, date } = useAppSelector(({ filter }) => filter);
+  const {
+    filter: {
+      platforms: { name: platform_name },
+      parent_platforms: { name: parent_platform_name },
+      dates: { name: date_name },
+    },
+  } = useAppSelector(({ data }) => data);
   const valueExists = () => {
-    if ((type === "platform" && platform) || (type === "date" && date)) {
+    if (
+      (type === "platform" && (platform_name?.trim() || parent_platform_name?.trim())) ||
+      (type === "date" && date_name?.trim())
+    ) {
       return true;
     }
     return false;
@@ -21,7 +30,12 @@ const FilterOption = ({ span1, span2, type }: { span1: string; span2: string; ty
         <p className=" whitespace-nowrap me-[6px] leading-[1.15rem]">
           <span>{span1}</span> <span className="font-bold">{span2}</span>
         </p>
-        <FontAwesomeIcon icon={faChevronDown} className={`${valueExists() && "group-hover/filter:text-black"} text-neutral-500 h-[14px] mt-[3px] me-[3px] transition-all duration-300 `} />
+        <FontAwesomeIcon
+          icon={faChevronDown}
+          className={`${
+            valueExists() && "group-hover/filter:text-black"
+          } text-neutral-500 h-[14px] mt-[3px] me-[3px] transition-all duration-300 `}
+        />
       </div>
     </button>
   );

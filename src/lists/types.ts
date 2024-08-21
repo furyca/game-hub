@@ -1,19 +1,22 @@
 export type ListProps = {
   name: string;
   value: string;
-  id?: number;
+  id?: number | undefined;
   expands?: ListProps[];
   secondary?: boolean;
 };
 export type MenuItemProps = {
   name: string;
-  url: string | null;
-  viewBox: string;
-  d: string;
-};
-
-export type GenreLinkProps = {
-  name: string;
-  icon: string;
   url: string;
+  filter: {
+    ordering: { name: string | null; value: string | null };
+    dates: { name: string | null; value: string };
+    platform: { name: string | null; value: string | null; id: number | null };
+    genre: { name: string | null; value: string | null };
+  } | null;
+  icon: {
+    path: string;
+    viewBox: string;
+    d: string;
+  };
 };
