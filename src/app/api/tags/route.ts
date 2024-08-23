@@ -1,3 +1,3 @@
 import { createApiHandler } from "../apiHandler";
 
-export const GET = createApiHandler("/tags");
+export const GET = createApiHandler("tags");

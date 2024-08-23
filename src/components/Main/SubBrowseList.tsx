@@ -18,21 +18,21 @@ const SubBrowseList = () => {
   const [list, setList] = useState<null | []>(null);
   const [path, setPath] = useState<null | BrowseItem>(null);
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
+  const browseStr = pathname.slice(1) as BrowsePropsKey;
 
   useEffect(() => {
     if (activePath) {
-      browse[activePath].count || dispatch(fetchOne({ path: pathname }));
+      browse[activePath].count || dispatch(fetchOne({ path: browseStr }));
     }
   }, [path]);
 
   useEffect(() => {
     if (inView && path?.haveNext) {
-      dispatch(fetchOneMore({ page, path: pathname }));
+      dispatch(fetchOneMore({ page, path: browseStr }));
     }
   }, [inView]);
 
   useEffect(() => {
-    const browseStr = pathname.slice(1) as BrowsePropsKey;
     setList(browse[browseStr].results);
     setPath(browse[browseStr]);
     dispatch(setActivePath(browseStr));
