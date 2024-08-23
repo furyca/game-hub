@@ -6,24 +6,19 @@ export function createApiHandler(endpoint: string) {
     const { search } = new URL(req.url);
     const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}${search || "?"}key=${apiKey}`;
 
-    for (let attempt = 0; attempt < 3; attempt++) {
-      try {
-        const response = await fetch(apiUrl);
-
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-
-        const data = await response.json();
-        return NextResponse.json(data);
-      } catch (error) {
-        if (attempt === 3) {
-          throw error;
-        }
-
-        console.error(`Attempt ${attempt} failed. Retrying in ${1000}ms...`, error);
-        await new Promise((res) => setTimeout(res, 1000));
+    try {
+      const response = await fetch(apiUrl);
+  
+      if (!response.ok) {
+        throw new Error(`Response error: ${response.statusText}`);
       }
+  
+      const data = await response.json();
+  
+      return NextResponse.json(data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return NextResponse.json({ error: "Failed to fetch data" }, { status: 500 });
     }
   };
 }
