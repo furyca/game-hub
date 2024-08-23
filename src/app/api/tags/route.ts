@@ -1,3 +1,3 @@
-import { createApiHandler } from "@/app/api/apiHandler";
+import { createApiHandler } from "../apiHandler";
 
 export const GET = createApiHandler("/tags");
