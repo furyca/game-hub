@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { capitalizeFirstLetter } from "../Main/helpers/capitalizeFirstLetter";
 
-const BrowseHeading = ({ name, count }: {name: string, count: number}) => {
+const BrowseHeading = ({ name, count }: { name: string; count: number }) => {
   return (
     <div className="mb-6">
       <Link href={`/${name}`} className="group/head-link">

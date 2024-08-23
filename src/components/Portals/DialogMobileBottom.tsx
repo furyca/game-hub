@@ -8,8 +8,6 @@ import {
   platformLinksShort,
   topLinks,
 } from "@/lists/menuLinks";
-// import HeadLink from "../Menu/HeadLink";
-// import SubMenu from "../Menu/SubMenu";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch } from "@/lib/hooks";
@@ -17,10 +15,7 @@ import { clearDialog } from "@/lib/features/portals/portalslice";
 import useClearSearch from "@/hooks/useClearSearch";
 import useAllGames from "@/hooks/useAllGames";
 import Link from "next/link";
-import ASubMenu from "../Menu/SubMenu";
-// import GenreItem from "../Menu/GenreItem";
-// import BrowseItem from "../Menu/BrowseItem";
-// import MenuItem from "../Menu/MenuItem";
+import SubMenu from "../Menu/SubMenu";
 
 const DialogMobileBottom = () => {
   const dispatch = useAppDispatch();
@@ -39,11 +34,9 @@ const DialogMobileBottom = () => {
             >
               Home
             </Link>
-            {/* <HeadLink name="Home" url="/" filterOpt={clearSearch} /> */}
           </div>
           <div className="mb-6">
-            <ASubMenu header="New Releases" data={{ short: newReleaseLinks, long: null }} url="/" />
-            {/* <SubMenu header="New Releases" data={{ short: newReleaseLinks, long: null }} url={null} Item={MenuItem} /> */}
+            <SubMenu header="New Releases" data={{ short: newReleaseLinks, long: null }} url="/" />
           </div>
           <div className="mb-6 font-bold text-[18px]">
             <Link
@@ -53,16 +46,9 @@ const DialogMobileBottom = () => {
             >
               All Games
             </Link>
-            {/* <HeadLink name="All Games" url="/games" filterOpt={allGamesOpts} /> */}
           </div>
           <div className="mb-6">
-            <ASubMenu header="Platforms" data={{ short: platformLinksShort, long: platformLinks }} url="/browse" />
-            {/* <SubMenu
-              header="Platforms"
-              data={{ short: platformLinksShort, long: platformLinks }}
-              url="/browse/platforms"
-              Item={MenuItem}
-            /> */}
+            <SubMenu header="Platforms" data={{ short: platformLinksShort, long: platformLinks }} url="/browse" />
           </div>
         </div>
         <div>
@@ -74,30 +60,15 @@ const DialogMobileBottom = () => {
               >
                 Reviews
               </Link>
-              {/* <HeadLink name="Reviews" url="/reviews" filterOpt={undefined} /> */}
             </div>
             <div className="mb-6">
-              <ASubMenu header="Top" data={{ short: topLinks, long: null }} url="/" />
-              {/* <SubMenu header="Top" data={{ short: topLinks, long: null }} url={null} Item={MenuItem} /> */}
+              <SubMenu header="Top" data={{ short: topLinks, long: null }} url="/" />
             </div>
             <div className="mb-6">
-              <ASubMenu header="Browse" data={{ short: browseLinksShort, long: browseLinks }} url="/browse" />
-              {/* <SubMenu
-                header="Browse"
-                data={{ short: browseLinksShort, long: browseLinks }}
-                url="/browse"
-                Item={BrowseItem}
-              /> */}
+              <SubMenu header="Browse" data={{ short: browseLinksShort, long: browseLinks }} url="/browse" />
             </div>
             <div className="mb-6">
-              <ASubMenu header="Genres" data={{ short: genreLinksShort, long: genreLinks }} url="/browse" />
-
-              {/* <SubMenu
-                header="Genres"
-                data={{ short: genreLinksShort, long: genreLinks }}
-                url="/browse/genres"
-                Item={GenreItem}
-              /> */}
+              <SubMenu header="Genres" data={{ short: genreLinksShort, long: genreLinks }} url="/browse" />
             </div>
           </div>
         </div>

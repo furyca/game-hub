@@ -2,10 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { browseLinks, genreLinks, newReleaseLinks, platformLinks, topLinks } from "@/lists/menuLinks";
-//import MenuItem from "../Menu/MenuItem";
 import { nanoid } from "nanoid";
-//import GenreItem from "../Menu/GenreItem";
-//import HeadLink from "../Menu/HeadLink";
 import { useCallback, useEffect, useState } from "react";
 import { setDialog } from "@/lib/features/portals/portalslice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
@@ -14,8 +11,7 @@ import { createPortal } from "react-dom";
 import useClearSearch from "@/hooks/useClearSearch";
 import useAllGames from "@/hooks/useAllGames";
 import Link from "next/link";
-import AItem from "../Menu/MenuItem";
-//import BrowseItem from "../Menu/BrowseItem";
+import MenuItem from "../Menu/MenuItem";
 
 const STARTING_LIST = [...newReleaseLinks, ...topLinks, ...platformLinks];
 const SCROLL_THRESHOLD = 150;
@@ -55,49 +51,42 @@ const BottomMenu = () => {
             >
               New and trending
             </Link>
-            {/* <HeadLink name="New and trending" url="/" filterOpt={clearSearch} /> */}
           </li>
           <li className="whitespace-nowrap">
-          <Link
+            <Link
               href="/"
               onClick={allGamesOpts}
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               All Games
             </Link>
-            {/* <HeadLink name="All Games" url="/reviews" filterOpt={allGamesOpts} /> */}
           </li>
           <li className="whitespace-nowrap">
-          <Link
-              href="/reviews"
-              //onClick={allGamesOpts}
+            <Link
+              href="/"
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               Reviews
             </Link>
-            {/* <HeadLink name="Reviews" url="/reviews" filterOpt={undefined} /> */}
           </li>
           {STARTING_LIST.map((item) => {
             return (
               <li className="whitespace-nowrap" key={nanoid()}>
-                <AItem name={item.name} filter={item.filter} url="/" icon={item.icon} />
-                {/* <MenuItem name={item.name} filter={item.filter} viewBox={item.viewBox} d={item.d} /> */}
+                <MenuItem name={item.name} title={item.title} subTitle={item.subTitle} filter={item.filter} url="/" icon={item.icon} />
               </li>
             );
           })}
           {genreLinks.map((item) => {
             return (
               <li className="whitespace-nowrap" key={nanoid()}>
-                <AItem name={item.name} filter={item.filter} url="/" icon={item.icon} />
-                {/* <GenreItem name={item.name} url={item.url} icon={item.icon} /> */}
+                <MenuItem name={item.name} title={item.title} subTitle={item.subTitle} filter={item.filter} url="/" icon={item.icon} />
               </li>
             );
           })}
           {browseLinks.map((item) => {
             return (
               <li className="whitespace-nowrap" key={nanoid()}>
-                <AItem name={item.name} filter={item.filter} url="/" icon={item.icon} />
-                {/* <BrowseItem name={item.name} url={item.url} viewBox={item.viewBox} d={item.d} /> */}
+                <MenuItem name={item.name} title={item.title} subTitle={item.subTitle} filter={item.filter} url="/" icon={item.icon} />
               </li>
             );
           })}

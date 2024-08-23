@@ -5,6 +5,8 @@ import { PortalState } from "./types";
 const initialState: PortalState = {
   activePortal: null,
   dialog: null,
+  header: "New and trending",
+  subHeader: "Based on player counts and release date"
 };
 
 export const portalSlice = createSlice({
@@ -17,6 +19,10 @@ export const portalSlice = createSlice({
     setDialog: (state, { payload }) => {
       state.dialog = payload;
     },
+    setHeader: (state, { payload }) => {
+      state.header = payload.header;
+      state.subHeader = payload.subHeader;
+    },
     clearPortal: (state) => {
       state.activePortal = null;
     },
@@ -26,7 +32,7 @@ export const portalSlice = createSlice({
   },
 });
 
-export const { setPortal, setDialog, clearPortal, clearDialog } = portalSlice.actions;
+export const { setPortal, setDialog, clearPortal, clearDialog, setHeader } = portalSlice.actions;
 
 export const setActive = (state: RootState) => state.portal.activePortal;
 

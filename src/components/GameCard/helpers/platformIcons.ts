@@ -1,7 +1,7 @@
 type platformsIconProps = {
-    slug: string;
-    icon: string;
-}[]
+  slug: string;
+  icon: string;
+}[];
 
 export const platformsIcons: platformsIconProps = [
   { slug: "pc", icon: "platformIcons/pc.svg" },

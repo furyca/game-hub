@@ -1,4 +1,6 @@
+import { capitalizeFirstLetter } from "@/components/Main/helpers/capitalizeFirstLetter";
 import SubBrowseList from "@/components/Main/SubBrowseList";
+import { Metadata } from "next";
 
 export const dynamicParams = false;
 
@@ -14,6 +16,13 @@ export function generateStaticParams() {
   ];
 }
 
-export default function Category({ params: { category } }: { params: { category: string } }) {
+export async function generateMetadata({ params }: { params: { category: string } }): Promise<Metadata> {
+  return {
+    title: capitalizeFirstLetter(params.category),
+    description: `Explore ${params.category}`
+  };
+}
+
+export default function Category() {
   return <SubBrowseList />;
 }

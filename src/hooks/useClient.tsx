@@ -5,8 +5,7 @@ const useClient = () => {
 
   useEffect(() => setClient(true), []);
 
-  return isClient
-
+  return isClient;
 };
 
 export default useClient;

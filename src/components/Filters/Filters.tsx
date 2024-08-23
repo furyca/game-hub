@@ -8,7 +8,7 @@ import { ordersLong } from "@/lists/orderingLists";
 import { platformsShort } from "@/lists/platformLists";
 import { setPortal } from "@/lib/features/portals/portalslice";
 import { createPortal } from "react-dom";
-import { ALL_TIMES, releaseDates } from "@/lists/releaseDates";
+import { releaseDates } from "@/lists/releaseDates";
 
 const Filters = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
@@ -24,7 +24,7 @@ const Filters = () => {
   const dispatch = useAppDispatch();
   const orderRef = useRef<HTMLLIElement>(null);
   const platformRef = useRef<HTMLLIElement>(null);
-  const dateRef = useRef<HTMLLIElement>(null);  
+  const dateRef = useRef<HTMLLIElement>(null);
 
   return (
     <div className="flex justify-between overflow-x-auto">
@@ -44,11 +44,7 @@ const Filters = () => {
               document.body
             )}
         </li>
-        <li
-          onClick={() => dispatch(setPortal("date"))}
-          ref={dateRef}
-          className={`${date_name ? "" : "hidden"}`}
-        >
+        <li onClick={() => dispatch(setPortal("date"))} ref={dateRef} className={`${date_name ? "" : "hidden"}`}>
           <FilterOption span1="Release Date:" span2={date_name || ""} type="date" />
           {activePortal === "date" &&
             createPortal(
@@ -64,7 +60,11 @@ const Filters = () => {
             )}
         </li>
         <li onClick={() => dispatch(setPortal("platform"))} ref={platformRef}>
-          <FilterOption span1={platform_name ? platform_name : parent_platform_name ? parent_platform_name : "Platforms"} span2="" type="platform" />
+          <FilterOption
+            span1={platform_name ? platform_name : parent_platform_name ? parent_platform_name : "Platforms"}
+            span2=""
+            type="platform"
+          />
           {activePortal === "platform" &&
             createPortal(
               <PortalContainer

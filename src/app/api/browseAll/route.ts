@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   const creatorsUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/creators${search || "?"}key=${apiKey}`;
   const developersUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/developers${search || "?"}key=${apiKey}`;
   const publishersUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/publishers${search || "?"}key=${apiKey}`;
-  const storesUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/stores${search || "?"}key=${apiKey}`;  
+  const storesUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/stores${search || "?"}key=${apiKey}`;
   
   try {
     const responses = await Promise.all([

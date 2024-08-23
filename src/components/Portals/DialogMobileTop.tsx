@@ -1,7 +1,6 @@
 import useClickOutside from "@/hooks/useClickOutside";
-import { clearDialog } from "@/lib/features/portals/portalslice";
+import { clearDialog, setHeader } from "@/lib/features/portals/portalslice";
 import { useAppDispatch } from "@/lib/hooks";
-// import HeadLink from "../Menu/HeadLink";
 import RateTop from "../Navbar/RateTop";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -34,7 +33,6 @@ const DialogMobileTop = () => {
               >
                 Home
               </Link>
-              {/* <HeadLink name="Home" url="/" filterOpt={clearSearch} /> */}
             </div>
             <div className="flex bg-white rounded  border text-black text-[18px] leading-none justify-between items-center  mb-2 me-2">
               <RateTop />
@@ -46,7 +44,6 @@ const DialogMobileTop = () => {
               >
                 Reviews
               </Link>
-              {/* <HeadLink name="Reviews" url="/" filterOpt={undefined} /> */}
             </div>
           </div>
           <div className="flex flex-col items-center gap-2">
@@ -72,46 +69,48 @@ const DialogMobileTop = () => {
             <Link
               href="/browse"
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+              onClick={() => dispatch(setHeader({ header: "Browse", subHeader: "" }))}
             >
               Browse
             </Link>
-            {/* <HeadLink name="Browse" url="/browse" filterOpt={undefined} /> */}
           </div>
           <ul>
             {browseLinks.map((item, index) => {
               return (
                 <div className="text-[18px] py-[6px] leading-5" key={index}>
-                  <Link href={item.url as string}>{item.name}</Link>
+                  <Link
+                    href={item.url as string}
+                    onClick={() => dispatch(setHeader({ header: item.title, subHeader: item.subTitle }))}
+                  >
+                    {item.name}
+                  </Link>
                 </div>
               );
             })}
           </ul>
           <div className="mb-5 mt-2 font-bold text-2xl">
-          <Link
+            <Link
               href="/"
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               API
             </Link>
-            {/* <HeadLink name="API" url="/" filterOpt={undefined} /> */}
           </div>
           <div className="mb-5 font-bold text-2xl">
-          <Link
+            <Link
               href="/"
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               Get an API key
             </Link>
-            {/* <HeadLink name="Get an API key" url="/" filterOpt={undefined} /> */}
           </div>
           <div className="mb-5 font-bold text-2xl">
-          <Link
+            <Link
               href="/"
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               Sitemap
             </Link>
-            {/* <HeadLink name="Sitemap" url="/" filterOpt={undefined} /> */}
           </div>
         </div>
       </div>

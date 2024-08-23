@@ -24,10 +24,9 @@ export type FilterProps = {
 export type DataState = {
   games: GameProps[];
   filter: FilterProps;
-  isCalendar: boolean,
+  isCalendar: boolean;
   haveNext: boolean;
   activeQuery: string | null;
   page: number;
   loading: "idle" | "pending";
-  loadingMore: "idle" | "pending";
 };

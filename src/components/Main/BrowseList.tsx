@@ -4,8 +4,9 @@ import { useCallback, useEffect, useState } from "react";
 import BrowseCard from "../BrowseCard/BrowseCard";
 import BrowseHeading from "../BrowseCard/BrowseHeading";
 import { BrowseCardProps } from "./types";
-import { fetchAll } from "@/lib/features/browse/browseSlice";
 import { BrowsePropsKey } from "@/lib/features/browse/types";
+import { browseAll } from "@/lib/features/browse/browseSlice";
+import LoadMore from "../LoadMore";
 
 const BrowseList = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ const BrowseList = () => {
     for (const key in browse) {
       if (browse[key as BrowsePropsKey].count === 0) {
         needFetch = true;
-        dispatch(fetchAll());
+        dispatch(browseAll());
         break;
       }
     }
@@ -57,7 +58,7 @@ const BrowseList = () => {
       {Object.entries(browse).map(([key, value]) => {
         return (
           <div key={key} className="mb-10">
-            <BrowseHeading name={key} count={value.count} />
+            {value.count ? <BrowseHeading name={key} count={value.count} /> : <LoadMore />}
             <div className={`lg:grid ${gridCols} whitespace-nowrap pb-4 gap-x-6 overflow-x-auto`}>
               {value.results.slice(0, amount).map((result: BrowseCardProps) => (
                 <div key={result.id} className="inline-block lg:block me-4 lg:me-0">

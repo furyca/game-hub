@@ -7,6 +7,8 @@ export type ListProps = {
 };
 export type MenuItemProps = {
   name: string;
+  title: string;
+  subTitle: string;
   url: string;
   filter: {
     ordering: { name: string | null; value: string | null };

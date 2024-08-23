@@ -33,13 +33,13 @@ const ListItem = ({ name, value, id, expands, secondary }: ListProps) => {
   const changeSelection = () => {
     switch (activePortal) {
       case "platform":
-        secondary ? dispatch(setPlatforms({id, name, value})) : dispatch(setParentPlatforms({id, name, value}));
+        secondary ? dispatch(setPlatforms({ id, name, value })) : dispatch(setParentPlatforms({ id, name, value }));
         break;
       case "date":
-        dispatch(setDates({name, value}));
+        dispatch(setDates({ name, value }));
         break;
       case "order":
-        dispatch(setOrdering({name, value}));
+        dispatch(setOrdering({ name, value }));
         break;
       default:
         break;

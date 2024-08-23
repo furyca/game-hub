@@ -4,10 +4,14 @@ import { SubMenuProps } from "./types";
 import { useState } from "react";
 import MenuItem from "./MenuItem";
 import ShowHide from "./ShowHide";
+import { useAppDispatch } from "@/lib/hooks";
+import { setHeader } from "@/lib/features/portals/portalslice";
+import { capitalizeFirstLetter } from "../Main/helpers/capitalizeFirstLetter";
 
 const SubMenu = ({ header, data, url }: SubMenuProps) => {
   const [list, setList] = useState(data.short);
-  const haveLong = () => data.long ? true : false;
+  const dispatch = useAppDispatch();
+  const haveLong = !!data.long;
 
   const toggleExpand = () => {
     setList(list === data.short ? data.long! : data.short);
@@ -20,6 +24,7 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
         <Link
           href={url}
           className="text-[18px] lg:text-2xl font-bold lg:mb-4 block leading-7 transition-all duration-200 hover:opacity-40"
+          onClick={() => dispatch(setHeader({ header: capitalizeFirstLetter(header), subHeader: "" }))}
         >
           {header}
         </Link>
@@ -29,10 +34,17 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
       <ul className="lg:mb-6">
         {list.map((item, index) => (
           <li key={index} className="text-sm mb-2 lg:text-base">
-            <MenuItem name={item.name} filter={item.filter} url={item.url} icon={item.icon} />
+            <MenuItem
+              name={item.name}
+              title={item.title}
+              subTitle={item.subTitle}
+              filter={item.filter}
+              url={item.url}
+              icon={item.icon}
+            />
           </li>
         ))}
-        {haveLong() && <ShowHide longList={list === data.long} handleCollapse={toggleExpand} />}
+        {haveLong && <ShowHide longList={list === data.long} handleCollapse={toggleExpand} />}
       </ul>
     </div>
   );

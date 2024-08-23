@@ -1,10 +1,10 @@
-import { setCalendar, setDates, setOrdering, setParentPlatforms, setPlatforms } from "@/lib/features/data/dataSlice";
+import { setDates, setOrdering, setParentPlatforms, setPlatforms } from "@/lib/features/data/dataSlice";
 import { useAppDispatch } from "@/lib/hooks";
 
-const useMenuFilters = ({dates, ordering, platform}: any) => {
+const useMenuFilters = ({ dates, ordering, platform }: any) => {
   const dispatch = useAppDispatch();
-  
-  const menuFilters = () => {   
+
+  const menuFilters = () => {
     dispatch(setDates({ name: dates.name, value: dates.value }));
     dispatch(setOrdering({ name: ordering.name, value: ordering.value }));
     platform.value === "platforms"

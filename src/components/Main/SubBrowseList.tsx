@@ -3,12 +3,12 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import Masonry from "react-masonry-css";
-import { breakpointColumnsBrowse, breakpointColumnsObj } from "./helpers/columnBreakpoints";
+import { breakpointColumnsBrowse } from "./helpers/columnBreakpoints";
 import BrowseCard from "../BrowseCard/BrowseCard";
 import { BrowseCardProps } from "./types";
 import { useInView } from "react-intersection-observer";
 import LoadMore from "../LoadMore";
-import { fetchAll, fetchOne, fetchOneMore, setActivePath } from "@/lib/features/browse/browseSlice";
+import { fetchOne, fetchOneMore, setActivePath } from "@/lib/features/browse/browseSlice";
 import { BrowseItem, BrowsePropsKey } from "@/lib/features/browse/types";
 
 const SubBrowseList = () => {

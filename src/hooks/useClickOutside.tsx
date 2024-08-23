@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useRef } from "react";
 
-const useClickOutside = (callback: () => { payload: void; type: string; } | null) => {
-  const ref = useRef<HTMLDivElement>();  
+const useClickOutside = (callback: () => { payload: void; type: string } | null) => {
+  const ref = useRef<HTMLDivElement>();
 
   useEffect(() => {
     const handleClick = (event: MouseEvent) => {
@@ -20,5 +20,4 @@ const useClickOutside = (callback: () => { payload: void; type: string; } | null
   return ref as RefObject<HTMLDivElement>;
 };
 
-
-export default useClickOutside
+export default useClickOutside;

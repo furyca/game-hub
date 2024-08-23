@@ -5,6 +5,8 @@ import { MenuItemProps } from "./types";
 export const newReleaseLinks: MenuItemProps[] = [
   {
     name: "Last 30 days",
+    title: "Last 30 days",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -33,6 +35,8 @@ export const newReleaseLinks: MenuItemProps[] = [
   },
   {
     name: "This week",
+    title: "This week",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -61,6 +65,8 @@ export const newReleaseLinks: MenuItemProps[] = [
   },
   {
     name: "Next week",
+    title: "Next week",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -89,6 +95,8 @@ export const newReleaseLinks: MenuItemProps[] = [
   },
   {
     name: "Release calendar",
+    title: "Release calendar",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -120,6 +128,8 @@ export const newReleaseLinks: MenuItemProps[] = [
 export const topLinks: MenuItemProps[] = [
   {
     name: "Best of the year",
+    title: "Best of the year",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -148,6 +158,8 @@ export const topLinks: MenuItemProps[] = [
   },
   {
     name: "Popular in 2023",
+    title: "Popular in 2023",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -176,6 +188,8 @@ export const topLinks: MenuItemProps[] = [
   },
   {
     name: "All time top 250",
+    title: "All time top 250",
+    subTitle: "",
     url: "/",
     filter: {
       ordering: {
@@ -207,6 +221,8 @@ export const topLinks: MenuItemProps[] = [
 export const browseLinksShort: MenuItemProps[] = [
   {
     name: "Platforms",
+    title: "Platforms",
+    subTitle: "",
     url: "/platforms",
     filter: null,
     icon: {
@@ -217,6 +233,8 @@ export const browseLinksShort: MenuItemProps[] = [
   },
   {
     name: "Stores",
+    title: "Stores",
+    subTitle: "",
     url: "/stores",
     filter: null,
     icon: {
@@ -227,7 +245,9 @@ export const browseLinksShort: MenuItemProps[] = [
   },
   {
     name: "Collections",
-    url: "/",
+    title: "Browse",
+    subTitle: "",
+    url: "/browse",
     filter: null,
     icon: {
       path: "",
@@ -241,7 +261,9 @@ export const browseLinks: MenuItemProps[] = [
   ...browseLinksShort,
   {
     name: "Reviews",
-    url: "/",
+    title: "Browse",
+    subTitle: "",
+    url: "/browse",
     filter: null,
     icon: {
       path: "",
@@ -251,6 +273,8 @@ export const browseLinks: MenuItemProps[] = [
   },
   {
     name: "Genres",
+    title: "Genres",
+    subTitle: "",
     url: "/genres",
     filter: null,
     icon: {
@@ -261,6 +285,8 @@ export const browseLinks: MenuItemProps[] = [
   },
   {
     name: "Creators",
+    title: "Creators",
+    subTitle: "",
     url: "/creators",
     filter: null,
     icon: {
@@ -271,6 +297,8 @@ export const browseLinks: MenuItemProps[] = [
   },
   {
     name: "Tags",
+    title: "Tags",
+    subTitle: "",
     url: "/tags",
     filter: null,
     icon: {
@@ -281,6 +309,8 @@ export const browseLinks: MenuItemProps[] = [
   },
   {
     name: "Developers",
+    title: "Developers",
+    subTitle: "",
     url: "/developers",
     filter: null,
     icon: {
@@ -291,6 +321,8 @@ export const browseLinks: MenuItemProps[] = [
   },
   {
     name: "Publishers",
+    title: "Publishers",
+    subTitle: "",
     url: "/publishers",
     filter: null,
     icon: {
@@ -304,6 +336,8 @@ export const browseLinks: MenuItemProps[] = [
 export const platformLinksShort: MenuItemProps[] = [
   {
     name: "PC",
+    title: "Games for PC",
+    subTitle: "PC games, or personal computer games, started with the video game crash of 1983. PC games became popular after the development of the microprocessor and microcomputer. Some of the first PC games were Bertie the Brain, OXO and Spacewar! As the 3D graphics accelerators became faster and CPU power improved, PC games became more realistic and more accessible to produce. The PC market sales rocketed in the 80s when IBM computers and sound cards were generated. The platform involves different peripherals, gaming hardware, and software. These are mouse and keyboard; gamepads and motion controllers aren't obligatory, but still popularly accepted. Better hardware improves the game's accuracy; it usually lets the players use more NPCs than equivalents on other platforms. With the platform, the players can perform every sort of game. For example, shooters are easy to play due to the mouse controllers. However, the main reason for the PC games popularity is their lower prices and the backward compatibility with older titles, which leaves much to be desired on cosoles.",
     url: "/",
     filter: {
       ordering: {
@@ -332,6 +366,8 @@ export const platformLinksShort: MenuItemProps[] = [
   },
   {
     name: "Playstation 4",
+    title: "Games for PlayStation 4",
+    subTitle: "PlayStation 4 is a home video game console launched in 2013 by Sony. There are currently three versions of the hardware variations: original console (also called 'fat'); a slim version with optical audio output removed, weight and size reduced as well as USB interfaces differently placed; and Pro version with 4k and HDR support added and PS VR functions improved. PS4 supports VR with the special helmet called PS VR. The starting game lineup of the system is considered to be a one of the most successful in history. The console maintains the status of an exclusive-oriented platform with many remasters and Playstation-only games. Together with the start of the system, there was a multiplayer requirement introduced — now everyone seeking to play via PlayStation Network must have PS Plus active. It is a paid subscription granting the player 5 games per month for all three platforms.",
     url: "/",
     filter: {
       ordering: {
@@ -360,6 +396,8 @@ export const platformLinksShort: MenuItemProps[] = [
   },
   {
     name: "Xbox One",
+    title: "Games for Xbox One",
+    subTitle: "Xbox One is a home video game console released by Microsoft in 2013. Unlike its main competitor — PlayStation 4, the accent in the development was made in multitasking and using a console as a home media player to watch TV, listen to music and play the games. There is three hardware option available to gamers: original console, One S version (with a smaller body, no external power supply, and native HDR/4k support) and One X (pro-gamer-oriented system with updated hardware and 4k rendering in real time). While PS4 is known for exclusive-orientation, Xbox One's games are mostly multi-platform titles. This supports Microsoft's initial idea to prevent selling used games between the players. However, given the competition from the Sony side, the corporation quickly gave up. Among the notable exclusive games, there are Sunset Overdrive, Halo 5: Guardians and Forza Motorsport 5.",
     url: "/",
     filter: {
       ordering: {
@@ -391,6 +429,8 @@ export const platformLinks: MenuItemProps[] = [
   ...platformLinksShort,
   {
     name: "Nintendo Switch",
+    title: "Games for Nintendo Switch",
+    subTitle: "Nintendo Switch is a hybrid video game console made by Nintendo. The system represents a tablet-like device with a touchscreen with detachable controllers on the sides. The system can be inserted into a docking station connected to the TV and serve as a home console. This allows the games on the system to be played both on a big screen or in the handheld with no need to reset the system to change the modes. The central controller for the Switch is a pair of Joy-Cons – small controllers both of which feature four face buttons, an analog stick, two side buttons, and high-definition vibration. The controllers can be used separately by different players, together using a grip accessory or attached to the system in handheld mode. Unlike many previous Nintendo consoles, as for 2019, the system has strong support from third-party developers, especially from the indie scene. The Switch introduced Nintendo Switch Online, a subscription-based service that resembles Xbox Live Gold and PlayStation Plus. It allows players to play online multiplayer, offers a selection of classic Nintendo games and lets players use cloud saves.",
     url: "/",
     filter: {
       ordering: {
@@ -419,6 +459,8 @@ export const platformLinks: MenuItemProps[] = [
   },
   {
     name: "iOS",
+    title: "Games for iOS",
+    subTitle: "iOS is an operating system initially developed by Apple and named iPhone OS by the title of the only phone developed by a corporation. While it was intended for mobile phones and media players at first, it has grown to tablets and TV-console. The OS is considered the second most famous system after Android. iOS is widely known for its closed source code and high data encryption making it nearly impossible to boot the system on the device other than Apple's. The system features a lot of apps unique to the Apple users including Siri — a voice assistant which can access apps as well as Game Center — a various apps manager allowing gamers to share their achievements while playing with friends. App Store is considered to be the most profound mobile application platform with strict selection and moderating policies. The most popular iOS hack is called Jailbreak and allows the user to overclock the CPU and access the hidden homebrew apps within the system.",
     url: "/",
     filter: {
       ordering: {
@@ -447,6 +489,8 @@ export const platformLinks: MenuItemProps[] = [
   },
   {
     name: "Android",
+    title: "Games for Android",
+    subTitle: "Android is a mobile operating system based on Linux kernel. The OS uses open-source code so that any developer can modify it. There is a considerable amount of Android devices from various mobile companies. Android application marketplace — Play Market is the most substantial accumulation of mobile games for one platform with iOS being the second largest one. Partly, such title comes from a little moderation required for an app to be published in the store, so there naturally are many scam apps and viruses there not to mention that any Android app can be pirated relatively easy. The separate bunch of Android devices is gaming consoles on the OS. It is the usual mobile phones but with higher performance values and built-in gamepads for more convenient use. The Google Play Games service was introduced featuring achievements, comparing scores between friends and listing various game tops.",
     url: "/",
     filter: {
       ordering: {
@@ -478,6 +522,8 @@ export const platformLinks: MenuItemProps[] = [
 export const genreLinksShort: MenuItemProps[] = [
   {
     name: "Free Online Games",
+    title: "Free Online Games",
+    subTitle: "",
     url: "/",
     filter: null,
     icon: {
@@ -488,6 +534,8 @@ export const genreLinksShort: MenuItemProps[] = [
   },
   {
     name: "Action",
+    title: "Action Games",
+    subTitle: "The action game is a genre that includes fights, puzzles, and strategies emphasizing coordination and reaction. It includes a large variety of sub-genres like fighting, beat 'em ups, shooters, survivals, mazes, and platforms; sometimes even multiplayer online battles and real-time strategies. Usually, the player performs as the protagonist with its unique abilities; some games add power-ups along the way. The character aims to complete levels, collect items, avoid obstacles, and battle against antagonists. It's necessary to avoid severe injuries during fights; if the health bar goes low, the player loses. Some games have an unbeatable number of enemies, and the only goal is to maximize score and survive for as long as possible. There might be a boss enemy who appears at the last level; he has unique abilities and a longer health bar. Pong is one of the first action games, released in 1972; the latest include Battlefield, Assasin's Creed, Fortnite and Dark Souls.",
     url: "/",
     filter: null,
     icon: {
@@ -498,6 +546,8 @@ export const genreLinksShort: MenuItemProps[] = [
   },
   {
     name: "Strategy",
+    title: "Strategy Games",
+    subTitle: "A strategy is a broad genre, its main feature lies in letting players be autonomous, they claim decision-making and high situational awareness, require private decision tree-style thinking as each action can determine the possible outcome. There are all sorts of strategies such as team plays, simulation games, and wargames. Many actions and adventure games need strategic thinking, but they can be hardly seen as ones. A strategy usually is extensive in range of sub-genres, its primary emphasis is on the player's ability to outthink opponents. It rarely involves a physical challenge, focusing on puzzles. There might be no enemy at all, which makes strategies very different from other genres. Resources, actions, powers, and gaps of each side of competitors are generally balanced. The last strategies released are Total War: Warhammer II, Mutant Year Zero: Road to Eden, and Into the Breach.",
     url: "/",
     filter: null,
     icon: {
@@ -511,6 +561,8 @@ export const genreLinks: MenuItemProps[] = [
   ...genreLinksShort,
   {
     name: "RPG",
+    title: "RPG Games",
+    subTitle: "Role-playing games use protagonists as the leading figures in the occurring events. The player performs as a protagonist; his moves affect the setting and the possible outcome. Some RPGs are created in the form of trading card games; some relate to wargames. Except for the video RPGs, the genre is divided into two primary forms; the original tabletop role-playing, handled through discussion, and live-action role-playing, conducted through the characters' actions. Each of them has a game master who's in charge of the rules and settings. The video RPGs include sandboxes, like GTA; tactical games, like Dragonfall; and roguelikes, like Mystery Dungeon. Usually, the primary purpose is to save the world or other characters. That includes taking part in collaborative storytelling, fighting, collecting items and solving puzzles if needed. The plot tends to develop in a fantasy or science fiction universe.",
     url: "/",
     filter: null,
     icon: {
@@ -521,6 +573,8 @@ export const genreLinks: MenuItemProps[] = [
   },
   {
     name: "Shooter",
+    title: "Shooter Games",
+    subTitle: "A shooter is a sub-genre of action video games the gameplay of which is thoroughly centered around shooting targets. Such games can be presented from first and the third perspectives with the latter being mostly twin-stick platforming shooters. Mouse and keyboard are widely regarded as the best controllers for shooters, as the firing demands high precision achieved only with manual aiming. The primary goal of shooters is to defeat enemies by discharging loads of bullets into them. Shooters are the most discussable video game genre when it comes to judging violence in games, as the gunfire process involves realistic scenes of killing quite often. Sub-genre of shooters is also divided by sub-subgenres such as shoot'em ups, tactical shooters, and hero shooters. The former involves changing a direction of movement and shooting forward while the latter focuses on wiping out tons of enemies by one protagonist. Notable games of the genre are Resogun, Bulletstorm and Call of Duty.",
     url: "/",
     filter: null,
     icon: {
@@ -531,6 +585,8 @@ export const genreLinks: MenuItemProps[] = [
   },
   {
     name: "Adventure",
+    title: "Adventure Games",
+    subTitle: "An adventure game is a genre in which the player performs as a protagonist. It is usually supported by puzzle-solving, gathering items, dialogues, and intervening goals. Adventure focus on story, many of them are designed for a single player. Colossal Cave Adventure is known as the first of the genre, released in 1976. They rocketed in the 1980s; later it led to the appearance of independent video game developers. The Walking Dead by TellTale Games is considered as the game which renewed the whole genre. It has a revolutionary mechanics which change the gameplay as the players make their choices. These games are still favorite among the users; independent developers start crowd-funding companies to raise money; the genre is celebrated on practically any platform.",
     url: "/",
     filter: null,
     icon: {
@@ -541,6 +597,8 @@ export const genreLinks: MenuItemProps[] = [
   },
   {
     name: "Puzzle",
+    title: "Puzzle Games",
+    subTitle: "Puzzle games are a broad genre that maintains logical and conceptual challenges; it may include concentration, logic, pattern recognition, word completion, and sequence searching. The games have either infinite attempts to solve puzzles and an unlimited amount of time or involve restricted timing and limited tries. They typically offer related puzzles for each theme, using the same colors, shapes, and numbers; however, the game design might be quite simple. There is also a set of rules which form the mechanics, and various outcomes leading to next levels. Sometimes they are tied into a whole story developing throughout the play. Minesweeper is one of the first puzzles developed in the 1980s. The gameplay and mechanics are very easy, and the game itself is cheap. At the time, it led to tremendous success which made puzzles one of the most favored genres ever since. It is now divided into various types and is available via the majority of platforms.",
     url: "/",
     filter: null,
     icon: {
@@ -551,6 +609,8 @@ export const genreLinks: MenuItemProps[] = [
   },
   {
     name: "Racing",
+    title: "Racing Games",
+    subTitle: "Racing games is the video game genre with a high focus on driving competition. Such games are usually presented from the first-person or a third-person perspective. It is noted that gamepads are generally more suited to control the vehicle than keyboard/mouse pair. Although car avatars may render real-life examples, there are many instances where spaceships, formless mechanisms and other fantastical entities take the role of the avatar. Grand Prix released in 1969 is considered to be the first racing game ever made. Racings is a defining genre of a video game which is, in turn, can be divided into a lot of sub-genres: for instance, a primary focus may be made on destroying enemies' vehicles (FlatOut, Twisted Metal) or crushing as many environments as possible (Split/Second). Those mechanics can alternatively be mixed with open world structure or set in the defined assortment of separate racing events.",
     url: "/",
     filter: null,
     icon: {
@@ -561,6 +621,8 @@ export const genreLinks: MenuItemProps[] = [
   },
   {
     name: "Sports",
+    title: "Sports Games",
+    subTitle: "Sports games are a genre that simulates competitive and single-player sports like arcades, management, simulation, multisport, and fighting. The primary goal is to compete with other players, either online or via consoles, upgrade clubs and buy new players, maintain a team's strategy. The genre was released in the 1970s, and the sales rocketed right away. The games recreate track and field, needed equipment, teams. Some of them maintain playing while others emphasize strategy and sports management. Games like Need for Speed and Punch-Out!!, mock sports for a subtle effect. It can be performed on every platform; some of them, like the Wii console, specialize in featuring sports games. EA and 2K dominate sports and hold licenses for developing games based on official leagues such as the Madden NFL series, the NBA series, the WWE 2K series, the NBA 2K series.",
     url: "/",
     filter: null,
     icon: {

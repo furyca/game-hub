@@ -44,8 +44,8 @@ const initialState: BrowseState = {
   loading: "idle",
 };
 
-export const fetchAll = createAsyncThunk("fetchAll", async () => {
-  const response = await fetch(`/api/fetchAll?`);
+export const browseAll = createAsyncThunk("browseAll", async () => {
+  const response = await fetch(`/api/browseAll?`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -83,11 +83,11 @@ export const browseSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchAll.pending, (state) => {
+    builder.addCase(browseAll.pending, (state) => {
       state.loading = "pending";
     });
     builder.addCase(
-      fetchAll.fulfilled,
+      browseAll.fulfilled,
       (state, { payload }: PayloadAction<{ count: number; next: string; results: [] }[]>) => {
         const [platforms, genres, tags, creators, developers, publishers, stores] = payload;
         state.browse["platforms"] = { count: platforms.count, haveNext: !!platforms.next, results: platforms.results };

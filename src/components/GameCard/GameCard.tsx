@@ -75,7 +75,8 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                 <Image
                   key={key}
                   loader={() => image}
-                  unoptimized={true}
+                  unoptimized
+                  priority
                   src={image}
                   alt={image}
                   width={600}
@@ -89,12 +90,12 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
           ) : background ? (
             <Image
               loader={() => background}
-              unoptimized={true}
+              unoptimized
+              priority
               src={background}
               alt={game.name}
               width={600}
               height={400}
-              priority
               className={`${
                 showScreenshots ? "hidden" : "block"
               } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
@@ -208,7 +209,13 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
             className="bg-white/10 text-white transition-all duration-300 w-full justify-between text-sm py-3 px-4 mt-4 rounded-lg hidden group-hover/card:flex hover:text-[#fad860]"
           >
             <span className="">Show more like this:</span>
-            <svg viewBox="0 0 19 35" width="12" height="18" xmlns="http://www.w3.org/2000/svg" className="opacity-20 w-3 h-[18px]">
+            <svg
+              viewBox="0 0 19 35"
+              width="12"
+              height="18"
+              xmlns="http://www.w3.org/2000/svg"
+              className="opacity-20 w-3 h-[18px]"
+            >
               <path
                 d="M18.414 16.476l-15-15A2 2 0 10.586 4.304L14.172 17.89.586 31.476a2 2 0 102.828 2.828l15-15a2 2 0 000-2.828z"
                 fill="#FFF"

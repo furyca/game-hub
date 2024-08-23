@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import GameCard from "../GameCard/GameCard";
 import Filters from "../Filters/Filters";
 import Masonry from "react-masonry-css";
@@ -14,12 +14,12 @@ import { breakpointColumnsObj } from "./helpers/columnBreakpoints";
 
 const GameList = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
-  const { games, filter, page, haveNext, activeQuery, isCalendar } = useAppSelector(({ data }) => data);
+  const { games, filter, page, haveNext, activeQuery, isCalendar, loading } = useAppSelector(({ data }) => data);
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
-  useEffect(() => {
-    dispatch(fetchGames(createURL(filter)));
+  useEffect(() => {   
+    activeQuery || dispatch(fetchGames(createURL(filter)));
   }, [filter]);
 
   useEffect(() => {
@@ -30,15 +30,14 @@ const GameList = () => {
     }
   }, [inView]);
 
-  //useCallback here
-  const listGames = () => {
+  const listGames = useCallback(() => {
     return (
       games.length > 0 &&
       games.map((game, index) => {
         return <GameCard key={index} game={game} />;
       })
     );
-  };
+  }, [games]);
 
   return (
     <div className="w-full mt-4">
@@ -50,9 +49,7 @@ const GameList = () => {
           <Filters />
         </>
       )}
-      {/* 
-      loading and loadingMore cause re-renders
-      {loading === "pending" && <LoadMore />} */}
+      {loading === "pending" && <LoadMore />}
       {masonry ? (
         <Masonry
           breakpointCols={breakpointColumnsObj}
@@ -64,7 +61,6 @@ const GameList = () => {
       ) : (
         <div className="flex flex-col items-center">{listGames()}</div>
       )}
-      {/* {loadingMore === "pending" && <LoadMore />} */}
       <div ref={ref} />
     </div>
   );

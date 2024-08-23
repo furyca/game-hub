@@ -1,12 +1,15 @@
 import { searchGames, setQuery } from "@/lib/features/data/dataSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
 
 const useSearch = () => {
   const dispatch = useAppDispatch();
   const { searchInput } = useAppSelector(({ input }) => input);
+  const router = useRouter()
 
   const search = (e: any) => {
     if (e.key === "Enter") {
+      router.push('/')
       dispatch(setQuery(searchInput));
       dispatch(searchGames({ query: searchInput }));
     }

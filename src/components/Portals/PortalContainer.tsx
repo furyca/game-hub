@@ -16,15 +16,15 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
   const haveFilter = () => {
     return (
       ((activePortal === "platform" && (filter.parent_platforms || filter.platforms)) ||
-      (activePortal === "date" && filter.dates)) && !secondary
+        (activePortal === "date" && filter.dates)) &&
+      !secondary
     );
   };
 
   const clearSelection = () => {
     if (activePortal === "date") {
       dispatch(clearDates());
-    }
-    else if (activePortal === "platform") {
+    } else if (activePortal === "platform") {
       dispatch(clearAllPlatforms());
     }
   };
@@ -32,10 +32,9 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
   //when selecting from Select All button
   const selectParent = () => {
     if (activePortal === "date") {
-      dispatch(setDates({parentName, parentVal}));
-    }
-    else if (activePortal === "platform") {
-      dispatch(setParentPlatforms({parentID, parentName, parentVal}));
+      dispatch(setDates({ parentName, parentVal }));
+    } else if (activePortal === "platform") {
+      dispatch(setParentPlatforms({ parentID, parentName, parentVal }));
     }
   };
 
