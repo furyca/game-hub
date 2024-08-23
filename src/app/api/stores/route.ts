@@ -1,3 +1,3 @@
-import { createApiHandler } from "@/lib/api/apiHandler";
+import { createApiHandler } from "@/app/api/apiHandler";
 
 export const GET = createApiHandler("/stores");
