@@ -18,11 +18,12 @@ const GameList = () => {
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
-  useEffect(() => {   
+  useEffect(() => {    
     activeQuery || dispatch(fetchGames(createURL(filter)));
   }, [filter]);
 
   useEffect(() => {
+    
     if (inView && haveNext) {
       activeQuery
         ? dispatch(searchMore({ query: activeQuery, page }))

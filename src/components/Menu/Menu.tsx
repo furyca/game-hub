@@ -28,7 +28,7 @@ const Menu = () => {
         Home
       </Link>
       <Link
-        href="/"
+        href=""
         className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
       >
         Reviews

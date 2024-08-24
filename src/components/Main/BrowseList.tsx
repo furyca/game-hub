@@ -15,10 +15,8 @@ const BrowseList = () => {
   const [gridCols, setGridCols] = useState("grid-cols-2");
 
   useEffect(() => {
-    let needFetch: boolean = false;
     for (const key in browse) {
       if (browse[key as BrowsePropsKey].count === 0) {
-        needFetch = true;
         dispatch(browseAll());
         break;
       }
