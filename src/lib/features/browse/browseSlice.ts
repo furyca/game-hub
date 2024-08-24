@@ -55,7 +55,7 @@ export const browseAll = createAsyncThunk("browseAll", async () => {
 });
 
 export const fetchOne = createAsyncThunk("fetchOne", async ({ path }: { path: string }) => {
-  const response = await fetch(`/api/${path}?page=1&`);
+  const response = await fetch(`/api/${path}?page=1`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -65,7 +65,7 @@ export const fetchOne = createAsyncThunk("fetchOne", async ({ path }: { path: st
 });
 
 export const fetchOneMore = createAsyncThunk("fetchOneMore", async ({ page, path }: { page: number; path: string }) => {
-  const response = await fetch(`/api/${path}?page=${page}&`);
+  const response = await fetch(`/api/${path}?page=${page}`);
 
   if (!response.ok) {
     throw new Error("Response error");

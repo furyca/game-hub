@@ -32,7 +32,7 @@ const initialState: DataState = {
 };
 
 export const fetchGames = createAsyncThunk("fetchGames", async (filter: string) => {
-  const response = await fetch(`/api/fetchGames?${filter}&`);
+  const response = await fetch(`/api/fetchGames?${filter}`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -42,7 +42,7 @@ export const fetchGames = createAsyncThunk("fetchGames", async (filter: string) 
 });
 
 export const fetchMore = createAsyncThunk("fetchMore", async ({ filter, page }: { filter: string; page: number }) => {
-  const response = await fetch(`/api/fetchGames?${filter}&page=${page}&`);
+  const response = await fetch(`/api/fetchGames?${filter}&page=${page}`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -52,7 +52,7 @@ export const fetchMore = createAsyncThunk("fetchMore", async ({ filter, page }: 
 });
 
 export const searchGames = createAsyncThunk("searchGames", async ({ query }: { query: string }) => {
-  const response = await fetch(`/api/fetchGames?search=${query}&`);
+  const response = await fetch(`/api/fetchGames?search=${query}`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -62,7 +62,7 @@ export const searchGames = createAsyncThunk("searchGames", async ({ query }: { q
 });
 
 export const searchMore = createAsyncThunk("searchMore", async ({ query, page }: { query: string; page: number }) => {
-  const response = await fetch(`/api/fetchGames?search=${query}&page=${page}&`);
+  const response = await fetch(`/api/fetchGames?search=${query}&page=${page}`);
 
   if (!response.ok) {
     throw new Error("Response error");

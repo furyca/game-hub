@@ -4,7 +4,7 @@ export function createApiHandler(endpoint: string) {
   return async function handler(req: NextRequest) {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const { search } = new URL(req.url);
-    const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}${search || "?"}key=${apiKey}`;
+    const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}${endpoint}${search ? `${search}&` : "?"}key=${apiKey}`;
 
     try {
       const response = await fetch(apiUrl);
