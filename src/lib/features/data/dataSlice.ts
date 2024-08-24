@@ -32,7 +32,7 @@ const initialState: DataState = {
 };
 
 export const fetchGames = createAsyncThunk("fetchGames", async (filter: string) => {
-  const response = await fetch(`/api/fetchGames?${filter}`);
+  const response = await fetch(`/api/fetchGames?${filter}&page_size=10`);
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -143,6 +143,7 @@ export const dataSlice = createSlice({
         if (state.haveNext) {
           state.page = !!payload.next ? 2 : 1;
         }
+        
         state.loading = "idle";
       }
     );
