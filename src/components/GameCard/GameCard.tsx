@@ -79,8 +79,8 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                   priority
                   src={image}
                   alt={image}
-                  width={600}
-                  height={400}
+                  width={420}
+                  height={280}
                   className={`${
                     currentSs !== index ? "hidden" : "block"
                   } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
@@ -94,8 +94,8 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
               priority
               src={background}
               alt={game.name}
-              width={600}
-              height={400}
+              width={420}
+              height={280}
               className={`${
                 showScreenshots ? "hidden" : "block"
               } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
