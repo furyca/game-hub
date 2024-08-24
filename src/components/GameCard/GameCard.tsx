@@ -9,6 +9,7 @@ import { getRankIcon } from "./helpers/getRankIcon";
 import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
 import { nanoid } from "nanoid";
+import { useInView } from "react-intersection-observer";
 
 const getGenres = (genres: GenreProps[]) => {
   const genreNames = genres.slice(0, 4).map(({ name }) => {
@@ -34,6 +35,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
     ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
     : null;
   const isMasonry = useAppSelector((state) => state.visual.masonry);
+  const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
   useEffect(() => {
     setScreenshots(
@@ -54,7 +56,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
 
   const handleSsEnter = (e: any) => {
     setCurrentSs(+e.target.id);
-  };
+  };  
 
   return (
     <div
@@ -76,11 +78,11 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                   key={key}
                   loader={() => image}
                   unoptimized
-                  priority
+                  priority={inView}
                   src={image}
                   alt={image}
-                  width={420}
-                  height={280}
+                  width={600}
+                  height={400}
                   className={`${
                     currentSs !== index ? "hidden" : "block"
                   } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
@@ -91,11 +93,11 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
             <Image
               loader={() => background}
               unoptimized
-              priority
+              priority={inView}
               src={background}
               alt={game.name}
-              width={420}
-              height={280}
+              width={600}
+              height={400}
               className={`${
                 showScreenshots ? "hidden" : "block"
               } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
@@ -224,6 +226,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
           </Link>
         </div>
       </div>
+      <div ref={ref} />
     </div>
   );
 });
