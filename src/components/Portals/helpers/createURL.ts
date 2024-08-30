@@ -1,4 +1,4 @@
-export const createURL = (filters: {}): string => {
+export const createURL = (filters: {}) => {
   let str = ``;
   for (const [key, val] of Object.entries(filters)) {
     if (key === "platforms" || key === "parent_platforms") {
