@@ -16,12 +16,12 @@ const GameList = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
   const { games, filter, page, haveNext, isCalendar, loading } = useAppSelector(({ data }) => data);
   const { activeQuery } = useAppSelector(({ input }) => input);
-
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
   useEffect(() => {
-    activeQuery || dispatch(fetchInitialGames(createURL(filter)));
+    const mobileView = window.innerWidth < 1025;
+    activeQuery || dispatch(fetchInitialGames({ filter: createURL(filter), size: mobileView ? 5 : 10 }));
   }, [filter, dispatch]);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const GameList = () => {
         ? dispatch(searchMoreGames({ query: activeQuery, page }))
         : dispatch(fetchMoreGames({ filter: createURL(filter), page }));
     }
-  }, [inView, dispatch]);  
+  }, [inView, dispatch]);
 
   const listGames = useCallback(() => {
     return (

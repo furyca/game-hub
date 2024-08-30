@@ -15,8 +15,8 @@ const fetchGames = async (endpoint: string) => {
   };
 };
 
-export const fetchInitialGames = createAsyncThunk("fetchInitialGames", async (filter: string) => {
-  return fetchGames(`/api/fetchGames?${filter}&page_size=10`);
+export const fetchInitialGames = createAsyncThunk("fetchInitialGames", async ({filter, size}: {filter: string ,size: number}) => {
+  return fetchGames(`/api/fetchGames?${filter}&page_size=${size}`);
 });
 
 export const fetchMoreGames = createAsyncThunk(
