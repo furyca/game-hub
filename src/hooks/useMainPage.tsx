@@ -11,9 +11,10 @@ const useMainPage = () => {
   const { clearSearch } = useClearSearch();
 
   const handleMainPage = () => {
+    const mobileView = window.innerWidth < 1025;
     clearSearch();
     dispatch(clearAllFilters());
-    dispatch(fetchInitialGames(createURL(filter)));
+    dispatch(fetchInitialGames({ filter: createURL(filter), size: mobileView ? 5 : 10 }));
     dispatch(setHeader({ header: "New and trending", subHeader: "Based on player counts and release date" }));
     dispatch(setCalendar(false));
   };
