@@ -17,6 +17,10 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
     setList(list === data.short ? data.long! : data.short);
   };
 
+  const handleHeadClick = () => {
+    dispatch(setHeader({ header: capitalizeFirstLetter(header), subHeader: "" }))
+  }
+
   return (
     <div>
       {/* if the url is more than a "/" */}
@@ -24,7 +28,7 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
         <Link
           href={url}
           className="text-[18px] lg:text-2xl font-bold lg:mb-4 block leading-7 transition-all duration-200 hover:opacity-40"
-          onClick={() => dispatch(setHeader({ header: capitalizeFirstLetter(header), subHeader: "" }))}
+          onClick={handleHeadClick}
         >
           {header}
         </Link>
@@ -34,14 +38,7 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
       <ul className="lg:mb-6">
         {list.map((item, index) => (
           <li key={index} className="text-sm mb-2 lg:text-base">
-            <MenuItem
-              name={item.name}
-              title={item.title}
-              subTitle={item.subTitle}
-              filter={item.filter}
-              url={item.url}
-              icon={item.icon}
-            />
+            <MenuItem {...item} />
           </li>
         ))}
         {haveLong && <ShowHide longList={list === data.long} handleCollapse={toggleExpand} />}

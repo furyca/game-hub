@@ -2,20 +2,19 @@ import { setInput } from "@/lib/features/input/inputSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useClearSearch from "@/hooks/useClearSearch";
 import useSearch from "@/hooks/useSearch";
+import useMainPage from "@/hooks/useMainPage";
 
 const Search = () => {
   const { searchInput } = useAppSelector(({ input }) => input);
   const dispatch = useAppDispatch();
-  const { clearSearch, inputRef } = useClearSearch();
   const search = useSearch();
+  const handleMainPage = useMainPage();
 
   return (
     <div className="lg:flex-grow me-3 lg:me-4 h-[60px] flex justify-between items-center">
       <div className="flex flex-grow items-center ps-2 relative lg:-mt-1.5 group/search">
         <input
-          ref={inputRef}
           type="text"
           name="search"
           id="search"
@@ -28,7 +27,7 @@ const Search = () => {
         />
         <div className="hidden absolute right-[15px] top-[11px] lg:flex justify-center items-center text-white/50 font-mono text-[11px] leading-[1.164]">
           {searchInput.length > 0 ? (
-            <button className="w-7" onClick={clearSearch}>
+            <button className="w-7" onClick={handleMainPage}>
               <FontAwesomeIcon icon={faXmark} size="2xl" className="group-hover/search:text-black" />
             </button>
           ) : (

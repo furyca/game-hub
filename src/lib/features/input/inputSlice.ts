@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { SearchData } from "./types";
 
-const initialState = {
+const initialState: SearchData = {
   searchInput: "",
+  activeQuery: "",
 };
 
 export const inputSlice = createSlice({
@@ -11,12 +13,16 @@ export const inputSlice = createSlice({
     setInput: (state, { payload }) => {
       state.searchInput = payload;
     },
-    clearInput: (state) => {
+    setQuery: (state, { payload }) => {
+      state.activeQuery = payload;
+    },
+    clearQuery: (state) => {
+      state.activeQuery = "";
       state.searchInput = "";
     },
   },
 });
 
-export const { setInput, clearInput } = inputSlice.actions;
+export const { setInput, setQuery, clearQuery } = inputSlice.actions;
 
 export default inputSlice.reducer;

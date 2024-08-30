@@ -2,9 +2,9 @@ import useClickOutside from "@/hooks/useClickOutside";
 import ListItem from "./ListItem";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { clearPortal } from "@/lib/features/portals/portalslice";
-import { nanoid } from "nanoid";
-import { clearDates, clearAllPlatforms, setDates, setParentPlatforms } from "@/lib/features/data/dataSlice";
+import { clearDates, clearPlatforms, setFilters } from "@/lib/features/data/dataSlice";
 import { PortalProps } from "./types";
+import { memo, useCallback, useMemo } from "react";
 
 const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentName }: PortalProps) => {
   const dispatch = useAppDispatch();
@@ -21,22 +21,56 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
     );
   };
 
-  const clearSelection = () => {
+  const clearSelection = useCallback(() => {
     if (activePortal === "date") {
       dispatch(clearDates());
     } else if (activePortal === "platform") {
-      dispatch(clearAllPlatforms());
+      dispatch(clearPlatforms());
     }
-  };
+  }, [activePortal, dispatch]);
 
   //when selecting from Select All button
-  const selectParent = () => {
+  const selectParent = useCallback(() => {
     if (activePortal === "date") {
-      dispatch(setDates({ parentName, parentVal }));
+      dispatch(
+        setFilters({
+          ...filter,
+          dates: {
+            name: parentName,
+            value: parentVal,
+          },
+        })
+      );
     } else if (activePortal === "platform") {
-      dispatch(setParentPlatforms({ parentID, parentName, parentVal }));
+      dispatch(
+        setFilters({
+          ...filter,
+          parent_platforms: {
+            id: parentID,
+            name: parentName,
+            value: parentVal,
+          },
+        })
+      );
     }
-  };
+  }, [activePortal, dispatch]);
+
+  const filterContent = useMemo(() => {
+    return (
+      <>
+        {activePortal === "platform" && !secondary && (
+          <div className="pt-3 text-sm px-[10px] text-black/50">Platforms</div>
+        )}
+        {haveFilter() && (
+          <li className="text-[#fc4531] border-b border-black/10 my-[5px] h-5 text-xs px-[10px] pb-[6px] flex items-center">
+            <button className="w-full text-start h-5 leading-[20px]" onClick={clearSelection}>
+              Clear
+            </button>
+          </li>
+        )}
+      </>
+    );
+  }, [activePortal, secondary, haveFilter, clearSelection]);
 
   return (
     <div
@@ -45,22 +79,9 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
       ref={outDiv}
     >
       <ul className={`${secondary ? "px-[7px] pb-[5px]" : "px-[10px] pb-[10px]"} pt-[5px] text-xs w-full`}>
-        {
-          <>
-            {activePortal === "platform" && !secondary && (
-              <div className="pt-3 text-sm px-[10px] text-black/50">Platforms</div>
-            )}
-            {haveFilter() && (
-              <li className="text-[#fc4531] border-b border-black/10 my-[5px] h-5 text-xs px-[10px] pb-[6px] flex items-center">
-                <button className="w-full text-start h-5 leading-[20px]" onClick={clearSelection}>
-                  Clear
-                </button>
-              </li>
-            )}
-          </>
-        }
-        {list.map(({ name, value, id, expands }) => {
-          return <ListItem key={nanoid()} name={name} id={id} value={value} expands={expands} secondary={secondary} />;
+        {filterContent}
+        {list.map(({ name, value, id, expands }, index) => {
+          return <ListItem key={index} name={name} id={id} value={value} expands={expands} secondary={secondary} />;
         })}
         {secondary && (
           <button
@@ -75,4 +96,4 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
   );
 };
 
-export default PortalContainer;
+export default memo(PortalContainer);

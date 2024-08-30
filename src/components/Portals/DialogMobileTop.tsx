@@ -7,11 +7,11 @@ import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { browseLinks } from "@/lists/menuLinks";
 import Link from "next/link";
-import useClearSearch from "@/hooks/useClearSearch";
+import useMainPage from "@/hooks/useMainPage";
 
 const DialogMobileTop = () => {
   const dispatch = useAppDispatch();
-  const { clearSearch } = useClearSearch();
+  const handleMainPage = useMainPage();
 
   const outDiv = useClickOutside(() => {
     return dispatch(clearDialog());
@@ -28,7 +28,7 @@ const DialogMobileTop = () => {
             <div className="mb-6 font-bold text-2xl">
               <Link
                 href="/"
-                onClick={clearSearch}
+                onClick={handleMainPage}
                 className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
               >
                 Home

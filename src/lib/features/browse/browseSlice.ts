@@ -1,5 +1,13 @@
-import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { BrowsePropsKey, BrowseState } from "./types";
+import { browseAll, browseOne, browseOneMore } from "./thunks";
+import {
+  handleAllFulfilled,
+  handleError,
+  handleLaterFulfilled,
+  handleOneFulfilled,
+  handlePending,
+} from "./asyncStateHandlers";
 
 const initialState: BrowseState = {
   browse: {
@@ -44,36 +52,6 @@ const initialState: BrowseState = {
   loading: "idle",
 };
 
-export const browseAll = createAsyncThunk("browseAll", async () => {
-  const response = await fetch(`/api/browseAll?`);
-
-  if (!response.ok) {
-    throw new Error("Response error");
-  }
-
-  return await response.json();
-});
-
-export const fetchOne = createAsyncThunk("fetchOne", async ({ path }: { path: string }) => {
-  const response = await fetch(`/api/${path}?page=1`);
-
-  if (!response.ok) {
-    throw new Error("Response error");
-  }
-
-  return await response.json();
-});
-
-export const fetchOneMore = createAsyncThunk("fetchOneMore", async ({ page, path }: { page: number; path: string }) => {
-  const response = await fetch(`/api/${path}?page=${page}`);
-
-  if (!response.ok) {
-    throw new Error("Response error");
-  }
-
-  return await response.json();
-});
-
 export const browseSlice = createSlice({
   name: "browseSlice",
   initialState,
@@ -83,59 +61,15 @@ export const browseSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(browseAll.pending, (state) => {
-      state.loading = "pending";
-    });
-    builder.addCase(
-      browseAll.fulfilled,
-      (state, { payload }: PayloadAction<{ count: number; next: string; results: [] }[]>) => {
-        const [platforms, genres, tags, creators, developers, publishers, stores] = payload;
-        state.browse["platforms"] = { count: platforms.count, haveNext: !!platforms.next, results: platforms.results };
-        state.browse["genres"] = { count: genres.count, haveNext: !!genres.next, results: genres.results };
-        state.browse["tags"] = { count: tags.count, haveNext: !!tags.next, results: tags.results };
-        state.browse["creators"] = { count: creators.count, haveNext: !!creators.next, results: creators.results };
-        state.browse["developers"] = {
-          count: developers.count,
-          haveNext: !!developers.next,
-          results: developers.results,
-        };
-        state.browse["publishers"] = {
-          count: publishers.count,
-          haveNext: !!publishers.next,
-          results: publishers.results,
-        };
-        state.browse["stores"] = { count: stores.count, haveNext: !!stores.next, results: stores.results };
-
-        state.loading = "idle";
-      }
-    );
-    builder.addCase(fetchOne.pending, (state) => {
-      state.loading = "pending";
-    });
-    builder.addCase(
-      fetchOne.fulfilled,
-      (state, { payload }: PayloadAction<{ count: number; next: string; results: [] }>) => {
-        const path = state.activePath as BrowsePropsKey;
-        state.browse[path] = { count: payload.count, haveNext: !!payload.next, results: payload.results };
-
-        state.loading = "idle";
-      }
-    );
-    builder.addCase(fetchOneMore.pending, (state) => {
-      state.loading = "pending";
-    });
-    builder.addCase(
-      fetchOneMore.fulfilled,
-      (state, { payload }: PayloadAction<{ count: number; next: string; results: [] }>) => {
-        if (state.activePath) {
-          state.browse[state.activePath].results = [...state.browse[state.activePath].results, ...payload.results];
-          state.browse[state.activePath].haveNext = !!payload.next;
-          state.page++;
-        }
-
-        state.loading = "idle";
-      }
-    );
+    builder.addCase(browseAll.pending, handlePending);
+    builder.addCase(browseAll.fulfilled, handleAllFulfilled);
+    builder.addCase(browseAll.rejected, handleError);
+    builder.addCase(browseOne.pending, handlePending);
+    builder.addCase(browseOne.fulfilled, handleOneFulfilled);
+    builder.addCase(browseOne.rejected, handleError);
+    builder.addCase(browseOneMore.pending, handlePending);
+    builder.addCase(browseOneMore.fulfilled, handleLaterFulfilled);
+    builder.addCase(browseOneMore.rejected, handleError);
   },
 });
 

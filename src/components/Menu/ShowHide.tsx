@@ -17,7 +17,7 @@ const ShowHide = ({ longList, handleCollapse }: { longList: boolean; handleColla
             />
           </svg>
         </span>
-        {longList ? <span className="leading-[1.35]">Hide</span> : <span className="leading-[1.35]">Show all</span>}
+        <span className="leading-[1.35]">{longList ? "Hide" : "Show all"}</span>
       </button>
     </li>
   );

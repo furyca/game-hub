@@ -10,15 +10,9 @@ const FilterOption = ({ span1, span2, type }: { span1: string; span2: string; ty
       dates: { name: date_name },
     },
   } = useAppSelector(({ data }) => data);
-  const valueExists = () => {
-    if (
-      (type === "platform" && (platform_name?.trim() || parent_platform_name?.trim())) ||
-      (type === "date" && date_name?.trim())
-    ) {
-      return true;
-    }
-    return false;
-  };
+  const valueExists = () =>
+    (type === "platform" && (platform_name?.trim() || parent_platform_name?.trim())) ||
+    (type === "date" && date_name?.trim());
 
   return (
     <button

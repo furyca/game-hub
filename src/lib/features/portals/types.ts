@@ -1,5 +1,5 @@
 export type PortalState = {
-  activePortal: "order" | "date" | "platform" | null;
+  activePortal: string;
   dialog: "top" | "bottom" | null;
   header: string,
   subHeader: string

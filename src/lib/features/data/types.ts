@@ -19,6 +19,10 @@ export type FilterProps = {
     name: string | null;
     value: string | null;
   };
+  genres: {
+    name: string | null
+    value: string | null
+  }
 };
 
 export type DataState = {
@@ -26,7 +30,6 @@ export type DataState = {
   filter: FilterProps;
   isCalendar: boolean;
   haveNext: boolean;
-  activeQuery: string | null;
   page: number;
   loading: "idle" | "pending";
 };

@@ -1,6 +1,4 @@
 "use client";
-import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
-import { faBars } from "@fortawesome/free-solid-svg-icons/faBars";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import NavBarLink from "./NavBarLink";
 import { useRef, useState } from "react";
@@ -12,6 +10,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setDialog } from "@/lib/features/portals/portalslice";
 import DialogMobileTop from "../Portals/DialogMobileTop";
 import RateTop from "./RateTop";
+import { faBars, faEllipsis } from "@fortawesome/free-solid-svg-icons";
 
 const NavBar = () => {
   const [dropdownActive, setDropdownActive] = useState(false);

@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { BrowseCardProps } from "../Main/types";
+import { memo } from "react";
+import { useInView } from "react-intersection-observer";
 
 const BrowseCard = ({ name, type, image_background, games, image, games_count }: BrowseCardProps) => {
+  const { ref, inView } = useInView({ rootMargin: "200px 0px" });
   const background =
     image_background &&
     image_background.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/");
@@ -22,6 +25,7 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
             <Image
               loader={() => image}
               unoptimized
+              priority={inView}
               src={image}
               alt="pp"
               width={0}
@@ -30,7 +34,7 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
             />
           )}
           <Link
-            href="/"
+            href=""
             className="font-bold leading-7 text-2xl border-b-2 border-white/40 transition-all duration-200 hover:text-white/40"
           >
             {name}
@@ -66,8 +70,9 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
           ))}
         </ul>
       </div>
+      <div ref={ref}/>
     </div>
   );
 };
 
-export default BrowseCard;
+export default memo(BrowseCard);

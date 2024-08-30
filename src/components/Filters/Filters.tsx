@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { masonryOn, masonryOff } from "@/lib/features/visuals/visualslice";
-import { useRef } from "react";
+import { memo, RefObject, useCallback, useRef } from "react";
 import FilterOption from "./FilterOption";
 import PortalContainer from "../Portals/PortalContainer";
 import { ordersLong } from "@/lists/orderingLists";
@@ -17,7 +17,7 @@ const Filters = () => {
     filter: {
       platforms: { name: platform_name },
       parent_platforms: { name: parent_platform_name },
-      dates: { name: date_name, value: date_value },
+      dates: { name: date_name },
       ordering: { name: order_name },
     },
   } = useAppSelector(({ data }) => data);
@@ -26,23 +26,21 @@ const Filters = () => {
   const platformRef = useRef<HTMLLIElement>(null);
   const dateRef = useRef<HTMLLIElement>(null);
 
+  const styles = useCallback((ref: RefObject<HTMLLIElement>) => {
+    return {
+      top: ref.current?.offsetTop,
+      left: ref.current?.offsetLeft,
+      width: ref.current?.offsetWidth,
+    }
+  },[])
+
   return (
     <div className="flex justify-between overflow-x-auto">
       <ul className="flex gap-2 items-center h-[55px]">
         <li onClick={() => dispatch(setPortal("order"))} ref={orderRef} className={`${order_name ? "" : "hidden"}`}>
           <FilterOption span1="Order by:" span2={order_name || ""} type="order" />
           {activePortal === "order" &&
-            createPortal(
-              <PortalContainer
-                list={ordersLong}
-                styles={{
-                  top: orderRef.current?.offsetTop,
-                  left: orderRef.current?.offsetLeft,
-                  width: orderRef.current?.offsetWidth,
-                }}
-              />,
-              document.body
-            )}
+            createPortal(<PortalContainer list={ordersLong} styles={styles(orderRef)} />, document.body)}
         </li>
         <li onClick={() => dispatch(setPortal("date"))} ref={dateRef} className={`${date_name ? "" : "hidden"}`}>
           <FilterOption span1="Release Date:" span2={date_name || ""} type="date" />
@@ -50,11 +48,7 @@ const Filters = () => {
             createPortal(
               <PortalContainer
                 list={releaseDates}
-                styles={{
-                  top: dateRef.current?.offsetTop,
-                  left: dateRef.current?.offsetLeft,
-                  width: dateRef.current?.offsetWidth,
-                }}
+                styles={styles(dateRef)}
               />,
               document.body
             )}
@@ -69,11 +63,7 @@ const Filters = () => {
             createPortal(
               <PortalContainer
                 list={platformsShort}
-                styles={{
-                  top: platformRef.current?.offsetTop,
-                  left: platformRef.current?.offsetLeft,
-                  width: platformRef.current?.offsetWidth,
-                }}
+                styles={styles(platformRef)}
               />,
               document.body
             )}
@@ -102,4 +92,4 @@ const Filters = () => {
   );
 };
 
-export default Filters;
+export default memo(Filters)

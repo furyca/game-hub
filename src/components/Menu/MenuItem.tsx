@@ -3,28 +3,26 @@ import Link from "next/link";
 import { MenuItemProps } from "@/lists/types";
 import useMenuFilters from "@/hooks/useMenuFilters";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { setCalendar } from "@/lib/features/data/dataSlice";
 import Image from "next/image";
 import { setHeader } from "@/lib/features/portals/portalslice";
 import { useEffect, useState } from "react";
 import useClearSearch from "@/hooks/useClearSearch";
+import { setCalendar } from "@/lib/features/data/dataSlice";
 
 const MenuItem = ({ name, title, subTitle, filter, url, icon: { viewBox, d, path } }: MenuItemProps) => {
   const dispatch = useAppDispatch();
-  const { ordering, dates, platform } = filter || {};
-  const menuFilters = useMenuFilters({ dates, ordering, platform });
+  const { ordering, dates, platform, genres } = filter || {};
+  const menuFilters = useMenuFilters({ dates, ordering, platform, genres });
   const { header } = useAppSelector(({ portal }) => portal);
+  const { activeQuery } = useAppSelector(({ input }) => input);
   const { clearSearch } = useClearSearch();
-  const [highlight, setHighlight] = useState(false);
-  const isCalendar = name === "Release calendar";
+  const [highlight, setHighlight] = useState(header === name);  
 
   const handleClick = () => {
-    if (filter) {
-      menuFilters();
-    }
-    clearSearch()
-    dispatch(setCalendar(isCalendar));
-    dispatch(setHeader({ header: title, subHeader: subTitle }));
+    activeQuery && clearSearch();
+    filter && menuFilters();
+    title && dispatch(setHeader({ header: title, subHeader: subTitle }));
+    dispatch(setCalendar(name === "Release calendar"))
   };
 
   useEffect(() => {

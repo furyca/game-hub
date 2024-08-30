@@ -1,14 +1,15 @@
 import { useState } from "react";
 import PortalContainer from "./PortalContainer";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import { setDates, setOrdering, setParentPlatforms, setPlatforms } from "@/lib/features/data/dataSlice";
 import { ListProps } from "@/lists/types";
+import { setFilters } from "@/lib/features/data/dataSlice";
 
 const ListItem = ({ name, value, id, expands, secondary }: ListProps) => {
   const [expanded, setExpanded] = useState(false);
   const dispatch = useAppDispatch();
   const { activePortal } = useAppSelector(({ portal }) => portal);
   const {
+    filter,
     filter: {
       platforms: { id: platformID },
       parent_platforms: { id: parent_platformID },
@@ -17,34 +18,34 @@ const ListItem = ({ name, value, id, expands, secondary }: ListProps) => {
     },
   } = useAppSelector(({ data }) => data);
 
-  const isSelected = () => {
-    switch (activePortal) {
-      case "platform":
-        return secondary ? platformID === id : parent_platformID === id;
-      case "date":
-        return dateVal === value;
-      case "order":
-        return orderVal === value;
-      default:
-        return false;
-    }
-  };
+  const isSelected =
+    {
+      platform: secondary ? platformID === id : parent_platformID === id,
+      date: dateVal === value,
+      order: orderVal === value,
+    }[activePortal] || false;
 
-  const changeSelection = () => {
-    switch (activePortal) {
-      case "platform":
-        secondary ? dispatch(setPlatforms({ id, name, value })) : dispatch(setParentPlatforms({ id, name, value }));
-        break;
-      case "date":
-        dispatch(setDates({ name, value }));
-        break;
-      case "order":
-        dispatch(setOrdering({ name, value }));
-        break;
-      default:
-        break;
-    }
-  };
+  const changeSelection =
+    {
+      platform: () =>
+        secondary
+          ? dispatch(
+              setFilters({
+                ...filter,
+                parent_platforms: { id: null, name: null, value: null },
+                platforms: { id, name, value },
+              })
+            )
+          : dispatch(
+              setFilters({
+                ...filter,
+                parent_platforms: { id, name, value },
+                platforms: { id: null, name: null, value: null },
+              })
+            ),
+      date: () => dispatch(setFilters({ ...filter, dates: { name, value } })),
+      order: () => dispatch(setFilters({ ...filter, ordering: { name, value } })),
+    }[activePortal] || (() => {});
 
   return (
     <li
@@ -57,7 +58,7 @@ const ListItem = ({ name, value, id, expands, secondary }: ListProps) => {
       <div className="whitespace-nowrap flex items-center justify-between" onClick={changeSelection}>
         <span>
           {name}
-          {isSelected() && (
+          {isSelected && (
             <div className="inline-block ms-1 w-[13px] h-[9px] bg-no-repeat bg-[center_50%] bg-cover bg-[url(/tick.svg)]" />
           )}
         </span>

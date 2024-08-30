@@ -5,30 +5,32 @@ import Filters from "../Filters/Filters";
 import Masonry from "react-masonry-css";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useInView } from "react-intersection-observer";
-import { fetchMore, fetchGames, searchMore } from "@/lib/features/data/dataSlice";
 import LoadMore from "../LoadMore";
 import { createURL } from "../Portals/helpers/createURL";
 import SearchBar from "../Filters/SearchBar";
 import Calendar from "../Filters/Calendar";
 import { breakpointColumnsObj } from "./helpers/columnBreakpoints";
+import { fetchInitialGames, fetchMoreGames, searchMoreGames } from "@/lib/features/data/thunks";
 
 const GameList = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
-  const { games, filter, page, haveNext, activeQuery, isCalendar, loading } = useAppSelector(({ data }) => data);
+  const { games, filter, page, haveNext, isCalendar, loading } = useAppSelector(({ data }) => data);
+  const { activeQuery } = useAppSelector(({ input }) => input);
+
   const dispatch = useAppDispatch();
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
   useEffect(() => {
-    activeQuery || dispatch(fetchGames(createURL(filter)));
-  }, [filter]);
+    activeQuery || dispatch(fetchInitialGames(createURL(filter)));
+  }, [filter, dispatch]);
 
   useEffect(() => {
     if (inView && haveNext) {
       activeQuery
-        ? dispatch(searchMore({ query: activeQuery, page }))
-        : dispatch(fetchMore({ filter: createURL(filter), page }));
+        ? dispatch(searchMoreGames({ query: activeQuery, page }))
+        : dispatch(fetchMoreGames({ filter: createURL(filter), page }));
     }
-  }, [inView]);
+  }, [inView, dispatch]);  
 
   const listGames = useCallback(() => {
     return (

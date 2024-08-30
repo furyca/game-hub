@@ -12,14 +12,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch } from "@/lib/hooks";
 import { clearDialog } from "@/lib/features/portals/portalslice";
-import useClearSearch from "@/hooks/useClearSearch";
 import useAllGames from "@/hooks/useAllGames";
 import Link from "next/link";
 import SubMenu from "../Menu/SubMenu";
+import useMainPage from "@/hooks/useMainPage";
 
 const DialogMobileBottom = () => {
   const dispatch = useAppDispatch();
-  const { clearSearch } = useClearSearch();
+  const handleMainPage = useMainPage();
   const allGamesOpts = useAllGames();
 
   return (
@@ -29,7 +29,7 @@ const DialogMobileBottom = () => {
           <div className="mb-6 font-bold text-[18px]">
             <Link
               href="/"
-              onClick={clearSearch}
+              onClick={handleMainPage}
               className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
             >
               Home

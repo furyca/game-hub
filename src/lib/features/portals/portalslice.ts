@@ -3,7 +3,7 @@ import type { RootState } from "../../store";
 import { PortalState } from "./types";
 
 const initialState: PortalState = {
-  activePortal: null,
+  activePortal: "",
   dialog: null,
   header: "New and trending",
   subHeader: "Based on player counts and release date"
@@ -24,7 +24,7 @@ export const portalSlice = createSlice({
       state.subHeader = payload.subHeader;
     },
     clearPortal: (state) => {
-      state.activePortal = null;
+      state.activePortal = "";
     },
     clearDialog: (state) => {
       state.dialog = null;

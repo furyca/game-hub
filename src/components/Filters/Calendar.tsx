@@ -1,23 +1,22 @@
-import { setDates } from "@/lib/features/data/dataSlice";
+import { setFilters } from "@/lib/features/data/dataSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { getCalendar } from "@/lists/helpers/formatDate";
+import { memo, useMemo } from "react";
 
 const Calendar = () => {
   const dispatch = useAppDispatch();
-  const {
-    filter: {
-      dates: { value },
-    },
-  } = useAppSelector(({ data }) => data);
+  const { filter, filter: { dates: { value }}} = useAppSelector(({ data }) => data);
 
   const changeMonth = (dateValue: string) => {
-    dispatch(setDates({ name: null, value: dateValue }));
+    dispatch(setFilters({...filter, dates: { name: null, value: dateValue} }))
   };
 
+  const calendar = useMemo(() => getCalendar(), []);
+  
   return (
     <div className="mb-3">
       <ul className="flex gap-x-4 gap-y-1 overflow-auto lg:flex-wrap">
-        {getCalendar().map(({ dateName, dateValue }, index) => {
+        {calendar.map(({ dateName, dateValue }, index) => {
           return (
             <li key={index}>
               <button
@@ -36,4 +35,4 @@ const Calendar = () => {
   );
 };
 
-export default Calendar;
+export default memo(Calendar)

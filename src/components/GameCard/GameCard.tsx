@@ -3,60 +3,65 @@ import { faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Image from "next/image";
 import Link from "next/link";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useCallback, useMemo, useRef, useState } from "react";
 import { platformsIcons } from "./helpers/platformIcons";
 import { getRankIcon } from "./helpers/getRankIcon";
 import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
-import { nanoid } from "nanoid";
 import { useInView } from "react-intersection-observer";
 
-const getGenres = (genres: GenreProps[]) => {
-  const genreNames = genres.slice(0, 4).map(({ name }) => {
-    const key = nanoid();
-    return (
-      <Link href="/" key={key} className="group transition-all duration-200 hover:text-white/40">
-        <span className="underline underline-offset-2">{name}</span>
-        <span className="group-last:hidden">, </span>
-      </Link>
-    );
-  });
-
-  return genreNames;
-};
 const GameCard = memo(({ game }: { game: GameProps }) => {
-  const [showScreenshots, setShowScreenshots] = useState<boolean>(false);
-  const [currentSs, setCurrentSs] = useState<number>(0);
-  const [screenshots, setScreenshots] = useState<string[]>([]);
+  const [screenshotState, setScreenshotState] = useState({ show: false, current: 0 });
   const parent = useRef<HTMLDivElement>(null);
-  const height = parent.current ? parent.current.offsetHeight : 0;
-  const platforms = game.parent_platforms ? game.parent_platforms?.map(({ platform }) => platform.slug) : [];
-  const background = game.background_image
-    ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
-    : null;
   const isMasonry = useAppSelector((state) => state.visual.masonry);
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
-
-  useEffect(() => {
-    setScreenshots(
+  const height = parent.current ? parent.current.offsetHeight : 0;
+  const platforms = useMemo(
+    () => (game.parent_platforms ? game.parent_platforms.map(({ platform }) => platform.slug) : []),
+    [game]
+  );
+  const screenshots = useMemo(
+    () =>
       game.short_screenshots?.length > 0
-        ? game.short_screenshots.slice(0, 7).map((ss: any) => {
-            return ss.image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/");
-          })
-        : []
-    );
+        ? game.short_screenshots
+            .slice(0, 7)
+            .map((ss: any) =>
+              ss.image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
+            )
+        : [],
+    [game]
+  );
+  const background = useMemo(
+    () =>
+      game.background_image
+        ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
+        : null,
+    [game]
+  );  
+
+  const handleCardEnter = useCallback(() => {
+    setScreenshotState({...screenshotState, show: true})
+  }, []);
+  const handleCardLeave = useCallback(() => {
+    setScreenshotState({...screenshotState, show: false})
   }, []);
 
-  const handleCardEnter = () => {
-    setShowScreenshots(true);
-  };
-  const handleCardLeave = () => {
-    setShowScreenshots(false);
-  };
+  const handleSsEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    setScreenshotState({show: true, current: +e.currentTarget.id})
+  }, []);
 
-  const handleSsEnter = (e: any) => {
-    setCurrentSs(+e.target.id);
-  };  
+  const getGenres = useCallback((genres: GenreProps[]) => {
+    const genreNames = genres.slice(0, 4).map(({ name }, index) => {
+      return (
+        <Link href="/" key={index} className="group transition-all duration-200 hover:text-white/40">
+          <span className="underline underline-offset-2">{name}</span>
+          <span className="group-last:hidden">, </span>
+        </Link>
+      );
+    });
+
+    return genreNames;
+  }, []);
 
   return (
     <div
@@ -70,52 +75,43 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
     >
       <div className="group-hover/card:absolute  group-hover/card:z-10 bg-[#202020] transition-all duration-300 rounded-xl w-full top-0 left-0 group-hover/card:scale-[1.02]">
         <div className="flex justify-center items-center relative h-0 pb-[56.25%]">
-          {showScreenshots && screenshots.length > 0 ? (
-            screenshots.map((image: string, index: number) => {
-              const key = nanoid();
-              return (
+          {screenshotState.show && screenshots.length > 0
+            ? screenshots.map((image: string, index: number) => {
+                return (
+                  <Image
+                    key={index}
+                    loader={() => image}
+                    unoptimized
+                    fill
+                    priority={inView}
+                    src={image}
+                    alt={image}
+                    className={`${
+                      screenshotState.current !== index ? "hidden" : "block"
+                    } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
+                  />
+                );
+              })
+            : background && (
                 <Image
-                  key={key}
-                  loader={() => image}
+                  loader={() => background}
                   unoptimized
                   fill
                   priority={inView}
-                  src={image}
-                  alt={image}
-                  //width={600}
-                  //height={400}
-                  
+                  src={background}
+                  alt={game.name}
                   className={`${
-                    currentSs !== index ? "hidden" : "block"
+                    screenshotState.show ? "hidden" : "block"
                   } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
                 />
-              );
-            })
-          ) : background ? (
-            <Image
-              loader={() => background}
-              unoptimized
-              fill
-              priority={inView}
-              src={background}
-              alt={game.name}
-              //width={600}
-              //height={400}
-              className={`${
-                showScreenshots ? "hidden" : "block"
-              } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
-            />
-          ) : (
-            <></>
-          )}
+              )}
           <div className="absolute right-0 left-0 top-0 w-full h-full px-4 ">
             <div className="relative h-full w-full flex gap-2 invisible group-hover/card:visible">
-              {screenshots.map((ss) => {
-                const key = nanoid();
+              {screenshots.map((ss, index) => {
                 return (
                   <div
                     className="relative w-full h-full group/ssicon"
-                    key={key}
+                    key={index}
                     id={screenshots.indexOf(ss).toString()}
                     onMouseEnter={handleSsEnter}
                   >
@@ -132,14 +128,13 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
           <div className="flex justify-between items-center">
             <div className="flex items-center text-sm gap-1">
               {platforms
-                ?.map((platform) => {
+                ?.map((platform, index) => {
                   const platformIcon = platformsIcons.find((platformIcon) => platformIcon.slug === platform);
 
                   if (platformIcon) {
-                    const key = nanoid();
                     return (
                       <Image
-                        key={key}
+                        key={index}
                         src={platformIcon.icon}
                         alt={platformIcon.icon}
                         className="w-[17px] h-[13px]"

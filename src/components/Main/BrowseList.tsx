@@ -5,8 +5,9 @@ import BrowseCard from "../BrowseCard/BrowseCard";
 import BrowseHeading from "../BrowseCard/BrowseHeading";
 import { BrowseCardProps } from "./types";
 import { BrowsePropsKey } from "@/lib/features/browse/types";
-import { browseAll } from "@/lib/features/browse/browseSlice";
 import LoadMore from "../LoadMore";
+import { debounce } from "@/lib/helpers";
+import { browseAll } from "@/lib/features/browse/thunks";
 
 const BrowseList = () => {
   const dispatch = useAppDispatch();
@@ -23,27 +24,27 @@ const BrowseList = () => {
     }
   }, []);
 
+  const handleAmount = useCallback(
+    debounce(() => {
+      if (window.innerWidth < 1025) {
+        setGridCols("grid-cols-8");
+        setAmount(8);
+      } else if (window.innerWidth < 1472) {
+        setGridCols("grid-cols-3");
+        setAmount(3);
+      } else if (window.innerWidth < 1940) {
+        setGridCols("grid-cols-4");
+        setAmount(4);
+      } else {
+        setGridCols("grid-cols-5");
+        setAmount(5);
+      }
+    }, 200),
+    []
+  );
+
   useEffect(() => {
     handleAmount();
-  }, []);
-
-  const handleAmount = useCallback(() => {
-    if (window.innerWidth < 1025) {
-      setGridCols("grid-cols-8");
-      setAmount(8);
-    } else if (window.innerWidth < 1472) {
-      setGridCols("grid-cols-3");
-      setAmount(3);
-    } else if (window.innerWidth < 1940) {
-      setGridCols("grid-cols-4");
-      setAmount(4);
-    } else {
-      setGridCols("grid-cols-5");
-      setAmount(5);
-    }
-  }, []);
-
-  useEffect(() => {
     window.addEventListener("resize", handleAmount);
 
     return () => {
@@ -61,6 +62,7 @@ const BrowseList = () => {
               {value.results.slice(0, amount).map((result: BrowseCardProps) => (
                 <div key={result.id} className="inline-block lg:block me-4 lg:me-0">
                   <BrowseCard
+                    id={result.id}
                     name={result.name}
                     type={key}
                     image_background={result.image_background}

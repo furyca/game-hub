@@ -1,4 +1,5 @@
-import { searchGames, setQuery } from "@/lib/features/data/dataSlice";
+import { searchGames } from "@/lib/features/data/thunks";
+import { setQuery } from "@/lib/features/input/inputSlice";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
 
@@ -13,7 +14,7 @@ const useSearch = () => {
       dispatch(setQuery(searchInput));
       dispatch(searchGames({ query: searchInput }));
     }
-  };
+  }
 
   return search;
 };

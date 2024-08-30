@@ -14,7 +14,7 @@ export type MenuItemProps = {
     ordering: { name: string | null; value: string | null };
     dates: { name: string | null; value: string };
     platform: { name: string | null; value: string | null; id: number | null };
-    genre: { name: string | null; value: string | null };
+    genres: { name: string | null; value: string | null };
   } | null;
   icon: {
     path: string;

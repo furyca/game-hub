@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { capitalizeFirstLetter } from "../Main/helpers/capitalizeFirstLetter";
+import { memo } from "react";
 
 const BrowseHeading = ({ name, count }: { name: string; count: number }) => {
   return (
@@ -32,4 +33,4 @@ const BrowseHeading = ({ name, count }: { name: string; count: number }) => {
   );
 };
 
-export default BrowseHeading;
+export default memo(BrowseHeading);
