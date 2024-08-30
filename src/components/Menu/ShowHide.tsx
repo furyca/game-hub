@@ -1,7 +1,7 @@
 const ShowHide = ({ longList, handleCollapse }: { longList: boolean; handleCollapse: () => void }) => {
   return (
     <li className="mb-2">
-      <button id="Expand/Collapse Option List" className="flex gap-2 items-center w-full text-start opacity-40 group/menu-link" onClick={handleCollapse}>
+      <button id="expand-collapse-list" aria-label="Expand/Collapse Option List" className="flex gap-2 items-center w-full text-start opacity-40 group/menu-link" onClick={handleCollapse}>
         <span className="flex justify-center items-center w-8 h-8 min-w-8 bg-white/10 rounded-md transition-all duration-300 group-hover/menu-link:bg-white">
           <svg
             viewBox="0 0 19 35"

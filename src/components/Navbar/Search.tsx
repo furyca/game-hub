@@ -27,7 +27,7 @@ const Search = () => {
         />
         <div className="hidden absolute right-[15px] top-[11px] lg:flex justify-center items-center text-white/50 font-mono text-[11px] leading-[1.164]">
           {searchInput.length > 0 ? (
-            <button id="Clear Search" className="w-7" onClick={handleMainPage}>
+            <button id="clear-search" aria-label="Clear Search" className="w-7" onClick={handleMainPage}>
               <FontAwesomeIcon icon={faXmark} size="2xl" className="group-hover/search:text-black" />
             </button>
           ) : (

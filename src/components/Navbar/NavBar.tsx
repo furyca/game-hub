@@ -30,7 +30,7 @@ const NavBar = () => {
         <Search />
         <div className="lg:ms-4 h-[60px] flex justify-between items-center px-2 lg:px-0">
           <div className="text-center lg:hidden">
-            <button id="Hamburger Button" onClick={() => dispatch(setDialog("top"))}>
+            <button id="hamburger-button" aria-label="Hamburger Button" onClick={() => dispatch(setDialog("top"))}>
               <FontAwesomeIcon icon={faBars} className="h-5" />
             </button>
           </div>

@@ -84,7 +84,7 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
           return <ListItem key={index} name={name} id={id} value={value} expands={expands} secondary={secondary} />;
         })}
         {secondary && (
-          <button id="Select All Filters"
+          <button id="select-all"
             className="text-[#31a94b] border-t border-[#dedede] mt-1 ps-[5px] py-[5px] pe-[25px]"
             onClick={selectParent}
           >
