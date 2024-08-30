@@ -63,7 +63,7 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
         )}
         {haveFilter() && (
           <li className="text-[#fc4531] border-b border-black/10 my-[5px] h-5 text-xs px-[10px] pb-[6px] flex items-center">
-            <button className="w-full text-start h-5 leading-[20px]" onClick={clearSelection}>
+            <button id="Clear Filter" className="w-full text-start h-5 leading-[20px]" onClick={clearSelection}>
               Clear
             </button>
           </li>
@@ -84,7 +84,7 @@ const PortalContainer = ({ list, styles, secondary, parentID, parentVal, parentN
           return <ListItem key={index} name={name} id={id} value={value} expands={expands} secondary={secondary} />;
         })}
         {secondary && (
-          <button
+          <button id="Select All Filters"
             className="text-[#31a94b] border-t border-[#dedede] mt-1 ps-[5px] py-[5px] pe-[25px]"
             onClick={selectParent}
           >

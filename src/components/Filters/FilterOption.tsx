@@ -16,6 +16,7 @@ const FilterOption = ({ span1, span2, type }: { span1: string; span2: string; ty
 
   return (
     <button
+      id={`${span1} Filter Dropdown"`}
       className={`${
         valueExists() ? "bg-white text-black" : "bg-white/[.07] hover:text-white/40"
       } px-4 py-[10px] rounded-lg text-sm min-w-[150px] transition-all duration-300 group/filter`}

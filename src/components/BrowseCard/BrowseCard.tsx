@@ -41,7 +41,7 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
           </Link>
         </div>
         <div className="mb-6 text-center">
-          <button className="bg-white/10 px-[35px] py-[10px] rounded leading-[normal] transition-all duration-200 hover:text-black hover:bg-white">
+          <button id="Follow" className="bg-white/10 px-[35px] py-[10px] rounded leading-[normal] transition-all duration-200 hover:text-black hover:bg-white">
             Follow
           </button>
         </div>

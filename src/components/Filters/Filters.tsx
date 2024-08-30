@@ -73,6 +73,7 @@ const Filters = () => {
         <p className="text-sm content-center opacity-40">Display options:</p>
         <div className="flex gap-2">
           <button
+            id="Masonry View On"
             className={`w-12 h-12 ${!masonry && "opacity-40 transition-opacity duration-300 hover:opacity-60"}`}
             onClick={() => dispatch(masonryOn())}
             disabled={masonry}
@@ -80,6 +81,7 @@ const Filters = () => {
             <Image src="/gridList.svg" alt="" width={56} height={56} />
           </button>
           <button
+            id="Masonry View Off"
             className={`w-12 h-12 ${masonry && "opacity-40 transition-opacity duration-300 hover:opacity-60"}`}
             onClick={() => dispatch(masonryOff())}
             disabled={!masonry}

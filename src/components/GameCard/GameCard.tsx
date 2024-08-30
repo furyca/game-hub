@@ -168,7 +168,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
             </Link>
           </div>
           <div className="flex gap-1">
-            <button className="py-0 px-2 h-6 rounded bg-white/[.1] text-xs flex justify-center items-center transition-all duration-200 group/button hover:bg-white hover:text-black">
+            <button id="Add to Favourites" className="py-0 px-2 h-6 rounded bg-white/[.1] text-xs flex justify-center items-center transition-all duration-200 group/button hover:bg-white hover:text-black">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" className="w-3 h-3 me-[6px]">
                 <g fill="#fff" fillRule="evenodd" className="group-hover/button:fill-black">
                   <rect width="3" height="12" x="4.5" rx=".75"></rect>
@@ -177,7 +177,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
               </svg>
               <span>{(game.added - game.added_by_status?.toplay).toString()}</span>
             </button>
-            <button className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 group/button hover:bg-white hover:text-black opacity-0 group-hover/card:opacity-100">
+            <button id="Gift the Game" className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 group/button hover:bg-white hover:text-black opacity-0 group-hover/card:opacity-100">
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" className="w-5 h-5">
                 <path
                   fill="#FFF"
@@ -186,7 +186,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                 ></path>
               </svg>
             </button>
-            <button className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 opacity-0 hover:bg-white hover:text-black group-hover/card:opacity-100">
+            <button id="Rate Game Pop-up" className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 opacity-0 hover:bg-white hover:text-black group-hover/card:opacity-100">
               <FontAwesomeIcon icon={faEllipsis} height={16} width={16} className="w-4 h-4 align-bottom" />
             </button>
           </div>

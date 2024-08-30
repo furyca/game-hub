@@ -7,7 +7,7 @@ import BottomMenu from "@/components/BottomMenu/BottomMenu";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html className="scroll-smooth">
+    <html className="scroll-smooth" lang="en">
       <body className="bg-[#151515] text-white overflow-x-hidden">
         <StoreProvider>
           <NavBar />
