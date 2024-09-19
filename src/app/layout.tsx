@@ -2,7 +2,6 @@ import "./globals.css";
 import StoreProvider from "./StoreProvider";
 import NavBar from "@/components/Navbar/NavBar";
 import Menu from "@/components/Menu/Menu";
-import Header from "@/components/Header/Header";
 import BottomMenu from "@/components/BottomMenu/BottomMenu";
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
@@ -13,8 +12,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           <NavBar />
           <main className="px-[10px] lg:px-10 max-w-[480px] m-auto lg:flex lg:max-w-[1920px]">
             <Menu />
-            <section className="flex-grow">
-              <Header />
+            <section className="flex-grow w-full">
               {children}
             </section>
           </main>

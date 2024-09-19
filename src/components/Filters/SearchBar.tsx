@@ -18,7 +18,6 @@ const SearchBar = () => {
         type="text"
         className="w-full bg-transparent outline-none border-b p-2"
         value={searchInput}
-        //debounce
         onChange={(e) => dispatch(setInput(e.target.value))}
         onKeyUp={(e) => search(e)}
       />

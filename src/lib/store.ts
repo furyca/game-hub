@@ -4,6 +4,7 @@ import portalslice from "./features/portals/portalslice";
 import dataSlice from "./features/data/dataSlice";
 import inputSlice from "./features/input/inputSlice";
 import browseSlice from "./features/browse/browseSlice";
+import singleGameSlice from "./features/singleGame/singleGameSlice";
 
 export const makeStore = () => {
   return configureStore({
@@ -12,7 +13,8 @@ export const makeStore = () => {
       portal: portalslice,
       data: dataSlice,
       input: inputSlice,
-      browse: browseSlice
+      browse: browseSlice,
+      singleGame: singleGameSlice
     },
   });
 };

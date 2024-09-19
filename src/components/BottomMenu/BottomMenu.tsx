@@ -12,6 +12,7 @@ import MenuItem from "../Menu/MenuItem";
 import dynamic from "next/dynamic";
 import { debounce } from "@/lib/helpers";
 import useMainPage from "@/hooks/useMainPage";
+import useDetailsPage from "@/hooks/useDetailsPage";
 
 const DialogMobileBottom = dynamic(() => import("../Portals/DialogMobileBottom"));
 
@@ -24,6 +25,7 @@ const BottomMenu = () => {
   const dispatch = useAppDispatch();
   const handleMainPage = useMainPage();
   const allGamesOpts = useAllGames();
+  const isDetails = useDetailsPage();
 
   const debounceScroll = debounce(() => {
     if (window.scrollY > SCROLL_THRESHOLD) {
@@ -50,8 +52,7 @@ const BottomMenu = () => {
             title={item.title}
             subTitle={item.subTitle}
             filter={item.filter}
-            //add URLs
-            url="/"
+            url={item.url}
             icon={item.icon}
           />
         </li>
@@ -60,7 +61,11 @@ const BottomMenu = () => {
   );
 
   return (
-    <div className={`fixed bottom-0 transition-all duration-200 bg-black text-sm w-full lg:hidden ${translate}`}>
+    <div
+      className={`fixed bottom-0 transition-all duration-200 bg-black text-sm w-full lg:hidden ${
+        isDetails && "hidden"
+      } ${translate}`}
+    >
       <div className="relative">
         <ul className="flex h-20 gap-3 items-center overflow-x-auto pe-16 ps-3">
           <li className="whitespace-nowrap">
@@ -82,10 +87,7 @@ const BottomMenu = () => {
             </Link>
           </li>
           <li className="whitespace-nowrap">
-            <Link
-              href="/"
-              className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 hover:opacity-40"
-            >
+            <Link href="/" className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 hover:opacity-40">
               Reviews
             </Link>
           </li>

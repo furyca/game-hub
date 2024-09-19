@@ -1,3 +1,4 @@
+import Header from "@/components/Header/Header";
 import BrowseList from "@/components/Main/BrowseList";
 import { Metadata } from "next";
 
@@ -7,5 +8,10 @@ export const metadata: Metadata = {
 };
 
 export default function Browse() {
-  return <BrowseList />;
+  return (
+    <>
+      <Header />
+      <BrowseList />;
+    </>
+  );
 }

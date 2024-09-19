@@ -1,9 +1,9 @@
-type platformsIconProps = {
+type PlatformsIconProps = {
   slug: string;
   icon: string;
 }[];
 
-export const platformsIcons: platformsIconProps = [
+export const platformsIcons: PlatformsIconProps = [
   { slug: "pc", icon: "platformIcons/pc.svg" },
   { slug: "playstation", icon: "platformIcons/ps.svg" },
   { slug: "xbox", icon: "platformIcons/xbox.svg" },

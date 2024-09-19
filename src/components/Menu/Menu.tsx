@@ -13,13 +13,16 @@ import {
   topLinks,
 } from "@/lists/menuLinks";
 import useMainPage from "@/hooks/useMainPage";
+import { usePathname } from "next/navigation";
 
 const Menu = () => {
   const allGamesOpts = useAllGames();
   const handleMainPage = useMainPage();
+  const pathname = usePathname();
+  const isDetails = pathname.startsWith("/games")
 
   return (
-    <aside className="hidden lg:block sticky top-0 w-[200px] shrink-0 mt-9 mr-5">
+    <aside className={`hidden ${isDetails ? "xl:block" : "lg:block"}  sticky top-0 w-[200px] shrink-0 mt-9 mr-5`}>
       <Link
         href="/"
         onClick={handleMainPage}

@@ -5,15 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { memo, useCallback, useMemo, useRef, useState } from "react";
 import { platformsIcons } from "./helpers/platformIcons";
-import { getRankIcon } from "./helpers/getRankIcon";
+import { getRankProps } from "./helpers/getRankProps";
 import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
 import { useInView } from "react-intersection-observer";
+import MetacriticRate from "../GameDetails/PageSections/MetacriticRate";
 
 const GameCard = memo(({ game }: { game: GameProps }) => {
   const [screenshotState, setScreenshotState] = useState({ show: false, current: 0 });
   const parent = useRef<HTMLDivElement>(null);
-  const isMasonry = useAppSelector((state) => state.visual.masonry);
+  const { masonry } = useAppSelector(({ visual }) => visual);
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
   const height = parent.current ? parent.current.offsetHeight : 0;
   const platforms = useMemo(
@@ -37,17 +38,17 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
         ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
         : null,
     [game]
-  );  
+  );
 
   const handleCardEnter = useCallback(() => {
-    setScreenshotState({...screenshotState, show: true})
+    setScreenshotState({ ...screenshotState, show: true });
   }, []);
   const handleCardLeave = useCallback(() => {
-    setScreenshotState({...screenshotState, show: false})
+    setScreenshotState({ ...screenshotState, show: false });
   }, []);
 
   const handleSsEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    setScreenshotState({show: true, current: +e.currentTarget.id})
+    setScreenshotState({ show: true, current: +e.currentTarget.id });
   }, []);
 
   const getGenres = useCallback((genres: GenreProps[]) => {
@@ -66,7 +67,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
   return (
     <div
       className={`${
-        !isMasonry && "w-full max-w-[714px]"
+        !masonry && "w-full max-w-[714px]"
       } "bg-[#202020] rounded-xl group/card relative mt-6 transition-all duration-300"`}
       style={{ height: height > 0 ? height : "auto" }}
       onMouseEnter={handleCardEnter}
@@ -147,18 +148,14 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                 .slice(0, 5)}
               {platforms?.length > 6 && <span>+{platforms.length - 5}</span>}
             </div>
-            {game.metacritic && (
-              <div className="py-[2px] font-bold text-sm text-[#6dc849] border-[#6dc84966] border rounded-[4px] min-w-8 text-center leading-[1.15]">
-                {game.metacritic}
-              </div>
-            )}
+            {game.metacritic && <MetacriticRate rate={game.metacritic} />}
           </div>
           <div className="my-2 ">
-            <Link href="/" className="hover:opacity-40 transition-all duration-200">
+            <Link href={`/games/${game.id}`} className="hover:opacity-40 transition-all duration-200">
               <h5 className="text-2xl font-bold inline my-2 me-2 leading-none">{game.name}</h5>
               {game.rating_top > 0 && (
                 <Image
-                  src={getRankIcon(game.rating_top)}
+                  src={getRankProps(game.rating_top).icon}
                   alt={game.rating_top.toString()}
                   className={`${game.rating_top === 5 ? "w-[30px] h-[30px]" : "w-[22px] h-[22px]"} inline align-bottom`}
                   width={30}
@@ -168,7 +165,10 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
             </Link>
           </div>
           <div className="flex gap-1">
-            <button id="add-favourites" className="py-0 px-2 h-6 rounded bg-white/[.1] text-xs flex justify-center items-center transition-all duration-200 group/button hover:bg-white hover:text-black">
+            <button
+              id="add-favourites"
+              className="py-0 px-2 h-6 rounded bg-white/[.1] text-xs flex justify-center items-center transition-all duration-200 group/button hover:bg-white hover:text-black"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 12" className="w-3 h-3 me-[6px]">
                 <g fill="#fff" fillRule="evenodd" className="group-hover/button:fill-black">
                   <rect width="3" height="12" x="4.5" rx=".75"></rect>
@@ -177,7 +177,11 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
               </svg>
               <span>{(game.added - game.added_by_status?.toplay).toString()}</span>
             </button>
-            <button id="gift-game" aria-label="Gift the Game" className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 group/button hover:bg-white hover:text-black opacity-0 group-hover/card:opacity-100">
+            <button
+              id="gift-game"
+              aria-label="Gift the Game"
+              className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 group/button hover:bg-white hover:text-black opacity-0 group-hover/card:opacity-100"
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" className="w-5 h-5">
                 <path
                   fill="#FFF"
@@ -186,7 +190,11 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                 ></path>
               </svg>
             </button>
-            <button id="rate-game" aria-label="Rate Game Pop-up" className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 opacity-0 hover:bg-white hover:text-black group-hover/card:opacity-100">
+            <button
+              id="rate-game"
+              aria-label="Rate Game Pop-up"
+              className="py-0 px-2 h-6 rounded flex justify-center items-center bg-white/[.1] text-xs transition-all duration-200 opacity-0 hover:bg-white hover:text-black group-hover/card:opacity-100"
+            >
               <FontAwesomeIcon icon={faEllipsis} height={16} width={16} className="w-4 h-4 align-bottom" />
             </button>
           </div>

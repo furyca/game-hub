@@ -1,11 +1,21 @@
 import { Metadata } from "next";
 import GameList from "../components/Main/GameList";
+import Header from "@/components/Header/Header";
 
 export const metadata: Metadata = {
   title: "Game Hub",
   description: "All video games from 1950s to the present",
 };
 
+/*
+Component check
+
+*/
 export default function HomePage() {
-  return <GameList />;
+  return (
+    <>
+      <Header />
+      <GameList />
+    </>
+  );
 }

@@ -63,7 +63,7 @@ const GameList = () => {
       ) : (
         <div className="flex flex-col items-center">{listGames()}</div>
       )}
-      {haveNext ? <LoadMore /> : <div className="mb-8"></div>}
+      {haveNext ? <LoadMore /> : <div className="mb-8"/>}
       <div ref={ref} />
     </div>
   );
