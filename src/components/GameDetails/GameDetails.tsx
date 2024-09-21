@@ -30,12 +30,12 @@ const GameDetails = ({ data }: {data: any}) => {
   }, []);
 
   return (
-    <div className="flex justify-center mb-32 w-full">
-      <div className="w-full lg:w-auto mx-auto">
+    <div className="flex justify-center mb-32">
+      <div className="w-full lg:w-auto mx-auto max-w-[480px] lg:max-w-[960px]">
         <Breadcrumb />
         <div className="flex w-full max-w-[480px] lg:max-w-[960px] flex-col lg:flex-row">
           {/* Left part */}
-          <div className="flex-auto w-full">
+          <div className="w-full">
             <GameMeta />
             {wideScreen || <GameScreenshots />}
             <UserActions />
@@ -49,7 +49,7 @@ const GameDetails = ({ data }: {data: any}) => {
             <SystemReqs />
           </div>
           {/* Right part */}
-          <div className="flex-auto lg:ms-12 lg:w-96">
+          <div className="lg:ms-12 lg:w-96">
             {wideScreen && <GameScreenshots />}
             {wideScreen && <EditGame />}
             <Stores />

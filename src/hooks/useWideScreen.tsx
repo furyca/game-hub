@@ -4,7 +4,7 @@ const useWideScreen = () => {
   const [wideScreen, setWideScreen] = useState(false);
 
   useEffect(() => {
-    setWideScreen(window.innerWidth > 1024);
+    setWideScreen(window.innerWidth > 1023);
   }, []);
 
   return wideScreen;
