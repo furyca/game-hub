@@ -7,10 +7,6 @@ export const metadata: Metadata = {
   description: "All video games from 1950s to the present",
 };
 
-/*
-Component check
-
-*/
 export default function HomePage() {
   return (
     <>

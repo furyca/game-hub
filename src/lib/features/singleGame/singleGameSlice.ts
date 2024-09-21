@@ -72,10 +72,12 @@ export const singleGameSlice = createSlice({
           name: game.stores[key].store.name,
           store_id: game.stores[key].store.id,
         };
-      });
-      state.screenshots = screenshots.results?.map((ss: any) => ss.image);
+      });      
+      state.screenshots = screenshots.results?.length > 0
+          ? screenshots.results.map(({image}: any) => image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/"))
+          : [];
       state.updated = game.updated;
-      state.website = game.website;      
+      state.website = game.website;
     },
   },
 });
