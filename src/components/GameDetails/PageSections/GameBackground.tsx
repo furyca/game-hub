@@ -5,8 +5,8 @@ const GameBackground = () => {
   const { background_image } = useAppSelector(({ singleGame }) => singleGame);
   const wideScreen = useWideScreen();
   const bg = wideScreen
-    ? background_image?.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
-    : background_image;
+    ? background_image
+    : background_image?.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/");
 
   return (
     <div

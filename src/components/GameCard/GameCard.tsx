@@ -73,6 +73,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
       onMouseEnter={handleCardEnter}
       onMouseLeave={handleCardLeave}
       ref={parent}
+      data-testid="game-item"
     >
       <div className="group-hover/card:absolute  group-hover/card:z-10 bg-[#202020] transition-all duration-300 rounded-xl w-full top-0 left-0 group-hover/card:scale-[1.02]">
         <div className="flex justify-center items-center relative h-0 pb-[56.25%]">

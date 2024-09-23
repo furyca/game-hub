@@ -74,7 +74,14 @@ export const singleGameSlice = createSlice({
         };
       });      
       state.screenshots = screenshots.results?.length > 0
-          ? screenshots.results.map(({image}: any) => image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/"))
+          ? screenshots.results.map(({image}: any, index: number) => {
+            if (index === 0) {
+              return image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/420/-/")
+            }
+            return (
+              image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/200/-/")
+            )
+          })
           : [];
       state.updated = game.updated;
       state.website = game.website;
