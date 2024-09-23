@@ -26,6 +26,7 @@ const initialState: SingleGameProps = {
   stores: [],
   updated: "",
   website: "",
+  loading: false,
 };
 
 export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: number) => {
@@ -45,10 +46,15 @@ export const singleGameSlice = createSlice({
     setScreenshots: (state, { payload }) => {
       state.screenshots = payload;
     },
+    resetGameState: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSingleGame.fulfilled, (state: SingleGameProps, { payload }) => {      
+    builder.addCase(fetchSingleGame.pending, (state: SingleGameProps) => {
+      state.loading = true;
+    });
+    builder.addCase(fetchSingleGame.fulfilled, (state: SingleGameProps, { payload }) => {
       const [game, screenshots] = payload;
+      state.loading = false;
       state.id = game.id;
       state.name = game.name;
       state.background_image = game.background_image;
@@ -100,5 +106,5 @@ export const singleGameSlice = createSlice({
   },
 });
 
-export const { setScreenshots } = singleGameSlice.actions;
+export const { setScreenshots, resetGameState } = singleGameSlice.actions;
 export default singleGameSlice.reducer;

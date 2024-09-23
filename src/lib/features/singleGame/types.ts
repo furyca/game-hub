@@ -20,6 +20,7 @@ export type SingleGameProps = {
   stores: StoreProps[];
   updated: string | null;
   website: string;
+  loading: boolean
 };
 
 export type ESRBProps = {

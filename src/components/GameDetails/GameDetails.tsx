@@ -1,5 +1,5 @@
 "use client";
-import { useAppDispatch } from "@/lib/hooks";
+import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import Breadcrumb from "./PageSections/Breadcrumb";
@@ -18,15 +18,21 @@ import GameScreenshots from "./PageSections/GameScreenshots";
 import Stores from "./PageSections/Stores";
 import useWideScreen from "@/hooks/useWideScreen";
 import useClient from "@/hooks/useClient";
-import { fetchSingleGame } from "@/lib/features/singleGame/singleGameSlice";
+import { fetchSingleGame, resetGameState } from "@/lib/features/singleGame/singleGameSlice";
 
-const GameDetails = ({id}: {id:number}) => {
+const GameDetails = ({ id }: { id: number }) => {
   const dispatch = useAppDispatch();
   const wideScreen = useWideScreen();
   const client = useClient();
 
   useEffect(() => {
-    dispatch(fetchSingleGame(id))
+    dispatch(fetchSingleGame(id));
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetGameState());
+    };
   }, []);
 
   return (
