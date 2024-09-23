@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { RatingProps, SingleGameProps } from "./types";
 
 const initialState: SingleGameProps = {
@@ -28,6 +28,16 @@ const initialState: SingleGameProps = {
   website: "",
 };
 
+export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: number) => {
+  const response = await fetch(`/api/getSingleGame?${id}`);
+
+  if (!response.ok) {
+    throw new Error("Response error");
+  }
+
+  return response.json();
+});
+
 export const singleGameSlice = createSlice({
   name: "singleGameSlice",
   initialState,
@@ -35,7 +45,9 @@ export const singleGameSlice = createSlice({
     setScreenshots: (state, { payload }) => {
       state.screenshots = payload;
     },
-    setGameData: (state, { payload }) => {
+  },
+  extraReducers: (builder) => {
+    builder.addCase(fetchSingleGame.fulfilled, (state: SingleGameProps, { payload }) => {      
       const [game, screenshots] = payload;
       state.id = game.id;
       state.name = game.name;
@@ -72,23 +84,21 @@ export const singleGameSlice = createSlice({
           name: game.stores[key].store.name,
           store_id: game.stores[key].store.id,
         };
-      });      
-      state.screenshots = screenshots.results?.length > 0
-          ? screenshots.results.map(({image}: any, index: number) => {
-            if (index === 0) {
-              return image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/420/-/")
-            }
-            return (
-              image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/200/-/")
-            )
-          })
+      });
+      state.screenshots =
+        screenshots.results?.length > 0
+          ? screenshots.results.map(({ image }: any, index: number) => {
+              if (index === 0) {
+                return image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/420/-/");
+              }
+              return image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/200/-/");
+            })
           : [];
       state.updated = game.updated;
       state.website = game.website;
-    },
+    });
   },
 });
 
-export const { setScreenshots, setGameData } = singleGameSlice.actions;
-
+export const { setScreenshots } = singleGameSlice.actions;
 export default singleGameSlice.reducer;

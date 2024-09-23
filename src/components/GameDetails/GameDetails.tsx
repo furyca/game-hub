@@ -18,15 +18,15 @@ import GameScreenshots from "./PageSections/GameScreenshots";
 import Stores from "./PageSections/Stores";
 import useWideScreen from "@/hooks/useWideScreen";
 import useClient from "@/hooks/useClient";
-import { setGameData } from "@/lib/features/singleGame/singleGameSlice";
+import { fetchSingleGame } from "@/lib/features/singleGame/singleGameSlice";
 
-const GameDetails = ({ data }: { data: any }) => {
+const GameDetails = ({id}: {id:number}) => {
   const dispatch = useAppDispatch();
   const wideScreen = useWideScreen();
   const client = useClient();
 
   useEffect(() => {
-    dispatch(setGameData(data));
+    dispatch(fetchSingleGame(id))
   }, []);
 
   return (

@@ -7,11 +7,6 @@ export const metadata: Metadata = {
   description: "All video games from 1950s to the present",
 };
 
-/*
-See how many endpoints would I need
-
-*/
-
 export default function HomePage() {
   return (
     <>
