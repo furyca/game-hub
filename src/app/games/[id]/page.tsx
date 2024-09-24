@@ -13,6 +13,6 @@ export async function generateMetadata({ params }: { params: { id: number } }): 
   };
 }
 
-export default async function Game({ params }: { params: { id: string } }) {
+export default function Game({ params }: { params: { id: string } }) {
   return <GameDetails id={params.id} />;
 }
