@@ -7,6 +7,7 @@ export async function GET(req: NextRequest) {
   const ssUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/games/${id}/screenshots?key=${process.env.NEXT_PUBLIC_API_KEY}`;
 
   const responses = await Promise.all([fetch(apiUrl), fetch(ssUrl)]);
+  const data = await Promise.all(responses.map((response) => response.json()))
 
-  return  NextResponse.json(await Promise.all(responses.map((response) => response.json())));
+  return  NextResponse.json(data);
 }
