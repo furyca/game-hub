@@ -29,7 +29,7 @@ const initialState: SingleGameProps = {
   loading: false,
 };
 
-export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: string) => {
+export const getSingleGame = createAsyncThunk("getSingleGame", async (id: string) => {
   const response = await fetch(`/api/getSingleGame?${id}`);
 
   if (!response.ok) {
@@ -49,10 +49,10 @@ export const singleGameSlice = createSlice({
     resetGameState: () => initialState,
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchSingleGame.pending, (state: SingleGameProps) => {
+    builder.addCase(getSingleGame.pending, (state: SingleGameProps) => {
       state.loading = true;
     });
-    builder.addCase(fetchSingleGame.fulfilled, (state: SingleGameProps, { payload }) => {
+    builder.addCase(getSingleGame.fulfilled, (state: SingleGameProps, { payload }) => {
       const [game, screenshots] = payload;
       state.loading = false;
       state.id = game.id;

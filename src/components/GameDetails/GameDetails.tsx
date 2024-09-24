@@ -1,5 +1,5 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/lib/hooks";
+import { useAppDispatch } from "@/lib/hooks";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 import Breadcrumb from "./PageSections/Breadcrumb";
@@ -18,16 +18,17 @@ import GameScreenshots from "./PageSections/GameScreenshots";
 import Stores from "./PageSections/Stores";
 import useWideScreen from "@/hooks/useWideScreen";
 import useClient from "@/hooks/useClient";
-import { fetchSingleGame, resetGameState } from "@/lib/features/singleGame/singleGameSlice";
+import { getSingleGame, resetGameState } from "@/lib/features/singleGame/singleGameSlice";
+import { usePathname } from "next/navigation";
 
 const GameDetails = ({ id }: { id: string }) => {
   const dispatch = useAppDispatch();
-  const {loading} = useAppSelector(({ singleGame }) => singleGame);
   const wideScreen = useWideScreen();
   const client = useClient();
+  const path = usePathname();  
 
   useEffect(() => {
-    dispatch(fetchSingleGame(id));
+    dispatch(getSingleGame(path.slice(path.lastIndexOf("/")+1)));
   }, [id]);
 
   useEffect(() => {
@@ -35,8 +36,7 @@ const GameDetails = ({ id }: { id: string }) => {
       dispatch(resetGameState());
     };
   }, []);
-  
-  if (loading) return
+    
   return (
     <div className="w-full lg:w-[960px] mx-auto max-w-[480px] lg:max-w-[960px]">
       <Breadcrumb />
