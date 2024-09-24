@@ -1,6 +1,5 @@
 import GameDetails from "@/components/GameDetails/GameDetails";
 import { Metadata } from "next";
-export const dynamicParams = true;
 
 export async function generateMetadata({ params }: { params: { id: number } }): Promise<Metadata> {
   const game = await fetch(
