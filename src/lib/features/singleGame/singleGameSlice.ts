@@ -36,7 +36,7 @@ export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: st
     throw new Error("Response error");
   }
 
-  return response.json();
+  return await response.json();
 });
 
 export const singleGameSlice = createSlice({
