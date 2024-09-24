@@ -29,11 +29,11 @@ const GameDetails = ({ id }: { id: number }) => {
     dispatch(fetchSingleGame(id));
   }, []);
 
-  useEffect(() => {
-    return () => {
-      dispatch(resetGameState());
-    };
-  }, []);
+  // useEffect(() => {
+  //   return () => {
+  //     dispatch(resetGameState());
+  //   };
+  // }, []);
 
   return (
     <div className="w-full lg:w-[960px] mx-auto max-w-[480px] lg:max-w-[960px]">
