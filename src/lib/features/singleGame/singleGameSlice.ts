@@ -58,15 +58,15 @@ export const singleGameSlice = createSlice({
       state.name = game.name;
       state.background_image = game.background_image;
       state.description = game.description;
-      state.developers = game.developers?.map((dev: any) => dev.name);
+      state.developers = game.developers.length > 0 ? game.developers?.map((dev: any) => dev.name): [];
       (state.esrb_rating = {
         id: game.esrb_rating?.id,
         name: game.esrb_rating?.name,
       }),
-        (state.genres = game.genres?.map((genre: any) => genre.name));
+      state.genres = game.genres.length > 0 ? game.genres?.map((genre: any) => genre.name): [];
       state.metacritic = game.metacritic;
-      state.parent_platforms = game.parent_platforms?.map(({ platform }: any) => platform.slug);
-      state.platforms = game.platforms && Object.keys(game.platforms).map((key) => {
+      state.parent_platforms = game.parent_platforms.length > 0 ? game.parent_platforms?.map(({ platform }: any) => platform.slug): [];
+      state.platforms = game.platforms.length > 0 ? Object.keys(game.platforms).map((key) => {
         return {
           name: game.platforms[key].platform.name,
           id: game.platforms[key].platform.id,
@@ -75,21 +75,20 @@ export const singleGameSlice = createSlice({
             recommended: game.platforms[key].requirements.recommended,
           },
         };
-      });
-
-      state.publishers = game.publishers?.map((publisher: any) => publisher.name);
+      }): [];
+      state.publishers = game.publishers.length > 0 ? game.publishers?.map((publisher: any) => publisher.name) : [];
       state.playtime = game.playtime;
       state.rating_top = game.rating_top;
       state.ratings = game.ratings ? game.ratings.slice().sort((a: RatingProps, b: RatingProps) => b.id - a.id) : [];
       state.ratings_count = game.ratings_count;
       state.released = game.released;
       state.reviews_count = game.reviews_count;
-      state.stores = game.stores && Object.keys(game.stores).map((key) => {
+      state.stores = game.stores.length > 0 ? Object.keys(game.stores).map((key) => {
         return {
           name: game.stores[key].store.name,
           store_id: game.stores[key].store.id,
         };
-      });
+      }): [];
       state.screenshots =
         screenshots.results?.length > 0
           ? screenshots.results.map(({ image }: any, index: number) => {
