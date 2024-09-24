@@ -1,4 +1,3 @@
-'use server'
 import GameDetails from "@/components/GameDetails/GameDetails";
 import { Metadata } from "next";
 
