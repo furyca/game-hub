@@ -20,7 +20,8 @@ const GameList = () => {
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
   useEffect(() => {
-    const mobileView = window.innerWidth < 1025;
+    //cannot use useWideScreen hook due to timing conflicts and restrictions on the use of window object
+    const mobileView = window.innerWidth < 1024;
     activeQuery || dispatch(fetchInitialGames({ filter: createURL(filter), size: mobileView ? 5 : 10 }));
   }, [filter, dispatch]);
 
@@ -63,7 +64,7 @@ const GameList = () => {
       ) : (
         <div className="flex flex-col items-center">{listGames()}</div>
       )}
-      {haveNext ? <LoadMore /> : <div className="mb-8"/>}
+      {haveNext ? <LoadMore /> : <div className="mb-8" />}
       <div ref={ref} data-testid="load-more-trigger" />
     </div>
   );

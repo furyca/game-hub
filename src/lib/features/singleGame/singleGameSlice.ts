@@ -67,7 +67,7 @@ export const singleGameSlice = createSlice({
         (state.genres = game.genres?.map((genre: any) => genre.name));
       state.metacritic = game.metacritic;
       state.parent_platforms = game.parent_platforms?.map(({ platform }: any) => platform.slug);
-      state.platforms = Object.keys(game.platforms).map((key) => {
+      state.platforms = game.platforms && Object.keys(game.platforms).map((key) => {
         return {
           name: game.platforms[key].platform.name,
           id: game.platforms[key].platform.id,
