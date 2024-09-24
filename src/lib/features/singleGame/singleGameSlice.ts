@@ -85,7 +85,7 @@ export const singleGameSlice = createSlice({
       state.ratings_count = game.ratings_count;
       state.released = game.released;
       state.reviews_count = game.reviews_count;
-      state.stores = Object.keys(game.stores).map((key) => {
+      state.stores = game.stores && Object.keys(game.stores).map((key) => {
         return {
           name: game.stores[key].store.name,
           store_id: game.stores[key].store.id,
