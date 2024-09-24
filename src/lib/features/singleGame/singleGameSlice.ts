@@ -30,19 +30,11 @@ const initialState: SingleGameProps = {
 };
 
 export const getSingleGame = createAsyncThunk("getSingleGame", async (id: string) => {
-  const response = await fetch(`/api/getSingleGame?/games/${id}`);
+  const response = await fetch(`/api/games?${id}`);
 
   if (!response.ok) {
     throw new Error("Response error");
   }
-
-  //temporary direct call
-  // const apiUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/games/${id}?key=${process.env.NEXT_PUBLIC_API_KEY}`;
-  // const ssUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/games/${id}/screenshots?key=${process.env.NEXT_PUBLIC_API_KEY}`;
-
-  // const responses = await Promise.all([fetch(apiUrl), fetch(ssUrl)]);
-  // const data = await Promise.all(responses.map((response) => response.json()));
-
 
   const data = await response.json();
 
