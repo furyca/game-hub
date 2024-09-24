@@ -36,7 +36,6 @@ export const getSingleGame = createAsyncThunk("getSingleGame", async (id: string
     throw new Error("Response error");
   }
 
-  console.log("Response:", response);
   const data = await response.json();
 
   return data
