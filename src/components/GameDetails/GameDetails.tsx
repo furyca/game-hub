@@ -30,11 +30,11 @@ const GameDetails = ({ id }: { id: string }) => {
     dispatch(getSingleGame(id));
   }, [id]);
 
-  // useEffect(() => {
-  //   return () => {
-  //     dispatch(resetGameState());
-  //   };
-  // }, []);
+  useEffect(() => {
+    return () => {
+      dispatch(resetGameState());
+    };
+  }, []);
     
   if (loading) return
   return (

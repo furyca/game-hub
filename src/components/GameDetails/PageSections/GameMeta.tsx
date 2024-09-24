@@ -11,7 +11,7 @@ const GameMeta = () => {
     <>
       <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 tracking-[2px] mb-3 text-xs uppercase">
         {released && <div className="py-[2px] px-2 bg-white text-black rounded">{convertDateString(released)}</div>}
-        {parent_platforms.length > 0 && (
+        {parent_platforms?.length > 0 && (
           <div className="flex gap-[10px]">
             {icons.map((icon, index) => {
               return (
