@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const GameMeta = () => {
   const { parent_platforms, playtime, released, name } = useAppSelector(({ singleGame }) => singleGame);
-  const icons = platformsIcons.filter((icon) => parent_platforms.includes(icon.slug));
+  const icons = platformsIcons.filter((icon) => parent_platforms?.includes(icon.slug));
 
   return (
     <>
