@@ -29,7 +29,7 @@ const initialState: SingleGameProps = {
   loading: false,
 };
 
-export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: number) => {
+export const fetchSingleGame = createAsyncThunk("fetchSingleGame", async (id: string) => {
   const response = await fetch(`/api/getSingleGame?${id}`);
 
   if (!response.ok) {
