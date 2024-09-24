@@ -21,6 +21,7 @@ import useClient from "@/hooks/useClient";
 import { getSingleGame, resetGameState } from "@/lib/features/singleGame/singleGameSlice";
 
 const GameDetails = ({ id }: { id: string }) => {
+  console.log(id);
   const dispatch = useAppDispatch();
   const { loading } = useAppSelector(({ singleGame }) => singleGame);
   const wideScreen = useWideScreen();
