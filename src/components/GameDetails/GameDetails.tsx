@@ -22,6 +22,7 @@ import { fetchSingleGame, resetGameState } from "@/lib/features/singleGame/singl
 
 const GameDetails = ({ id }: { id: number }) => {
   const dispatch = useAppDispatch();
+  const { name } = useAppSelector(({ singleGame }) => singleGame);
   const wideScreen = useWideScreen();
   const client = useClient();
 
@@ -34,6 +35,8 @@ const GameDetails = ({ id }: { id: number }) => {
       dispatch(resetGameState());
     };
   }, []);
+
+  if (!name) return
 
   return (
     <div className="w-full lg:w-[960px] mx-auto max-w-[480px] lg:max-w-[960px]">
