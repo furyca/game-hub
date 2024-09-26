@@ -3,12 +3,13 @@ import { useAppSelector, useAppDispatch } from "@/lib/hooks";
 import { masonryOn, masonryOff } from "@/lib/features/visuals/visualslice";
 import { memo, RefObject, useCallback, useRef } from "react";
 import FilterOption from "./FilterOption";
-import PortalContainer from "../Portals/PortalContainer";
 import { ordersLong } from "@/lists/orderingLists";
 import { platformsShort } from "@/lists/platformLists";
 import { setPortal } from "@/lib/features/portals/portalslice";
 import { createPortal } from "react-dom";
 import { releaseDates } from "@/lists/releaseDates";
+import dynamic from "next/dynamic";
+const PortalContainer = dynamic(() => import("../Portals/PortalContainer"))
 
 const Filters = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);

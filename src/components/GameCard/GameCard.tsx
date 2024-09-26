@@ -9,7 +9,8 @@ import { getRankProps } from "./helpers/getRankProps";
 import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
 import { useInView } from "react-intersection-observer";
-import MetacriticRate from "../GameDetails/PageSections/MetacriticRate";
+import dynamic from "next/dynamic";
+const MetacriticRate = dynamic(() => import("../GameDetails/PageSections/MetacriticRate"))
 
 const GameCard = memo(({ game }: { game: GameProps }) => {
   const [screenshotState, setScreenshotState] = useState({ show: false, current: 0 });

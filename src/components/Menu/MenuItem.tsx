@@ -3,11 +3,12 @@ import Link from "next/link";
 import { MenuItemProps } from "@/lists/types";
 import useMenuFilters from "@/hooks/useMenuFilters";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
-import Image from "next/image";
 import { setHeader } from "@/lib/features/portals/portalslice";
 import { useEffect, useState } from "react";
 import useClearSearch from "@/hooks/useClearSearch";
 import { setCalendar } from "@/lib/features/data/dataSlice";
+import dynamic from "next/dynamic";
+const Image = dynamic(() => import("next/image"))
 
 const MenuItem = ({ name, title, subTitle, filter, url, icon: { viewBox, d, path } }: MenuItemProps) => {
   const dispatch = useAppDispatch();

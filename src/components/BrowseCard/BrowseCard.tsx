@@ -1,10 +1,13 @@
-import Image from "next/image";
 import Link from "next/link";
 import { BrowseCardProps } from "../Main/types";
 import { memo } from "react";
 import { useInView } from "react-intersection-observer";
+import dynamic from "next/dynamic";
+import useMainPage from "@/hooks/useMainPage";
+const Image = dynamic(() => import("next/image"))
 
 const BrowseCard = ({ name, type, image_background, games, image, games_count }: BrowseCardProps) => {
+  const handleMainPage = useMainPage();
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
   const background =
     image_background &&
@@ -34,8 +37,9 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
             />
           )}
           <Link
-            href=""
+            href="/"
             className="font-bold leading-7 text-2xl border-b-2 border-white/40 transition-all duration-200 hover:text-white/40"
+            onClick={handleMainPage}
           >
             {name}
           </Link>
@@ -53,10 +57,10 @@ const BrowseCard = ({ name, type, image_background, games, image, games_count }:
           <span className="text-sm text-white/40">{games_count}</span>
         </div>
         <ul className="border-t border-white/10 pt-2 mt-2 leading-5">
-          {games?.map(({ name, added }, index) => (
+          {games?.map(({ name, added, id }, index) => (
             <li key={index} className="flex justify-between text-sm mb-[6px]">
               <Link
-                href="/"
+                href={`/games/${id}`}
                 className="max-w-[80%] text-ellipsis whitespace-nowrap overflow-hidden text-sm leading-[1.] transition-all duration-200 hover:text-white/40"
                 style={{
                   backgroundImage:

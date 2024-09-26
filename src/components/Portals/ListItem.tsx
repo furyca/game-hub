@@ -1,8 +1,9 @@
 import { useState } from "react";
-import PortalContainer from "./PortalContainer";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { ListProps } from "@/lists/types";
 import { setFilters } from "@/lib/features/data/dataSlice";
+import dynamic from "next/dynamic";
+const PortalContainer = dynamic(() => import("./PortalContainer"))
 
 const ListItem = ({ name, value, id, expands, secondary }: ListProps) => {
   const [expanded, setExpanded] = useState(false);

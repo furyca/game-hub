@@ -4,13 +4,14 @@ import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import Masonry from "react-masonry-css";
 import { breakpointColumnsBrowse } from "./helpers/columnBreakpoints";
-import BrowseCard from "../BrowseCard/BrowseCard";
 import { BrowseCardProps } from "./types";
 import { useInView } from "react-intersection-observer";
-import LoadMore from "../LoadMore";
 import { setActivePath } from "@/lib/features/browse/browseSlice";
 import { BrowsePropsKey } from "@/lib/features/browse/types";
 import { browseOne, browseOneMore } from "@/lib/features/browse/thunks";
+import dynamic from "next/dynamic";
+const LoadMore = dynamic(() => import("../LoadMore"))
+const BrowseCard = dynamic(() => import("../BrowseCard/BrowseCard"))
 
 const SubBrowseList = () => {
   const dispatch = useAppDispatch();

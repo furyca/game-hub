@@ -1,12 +1,13 @@
 "use client";
-import Link from "next/link";
 import { SubMenuProps } from "./types";
 import { useState } from "react";
 import MenuItem from "./MenuItem";
-import ShowHide from "./ShowHide";
 import { useAppDispatch } from "@/lib/hooks";
 import { setHeader } from "@/lib/features/portals/portalslice";
 import { capitalizeFirstLetter } from "../Main/helpers/capitalizeFirstLetter";
+import dynamic from "next/dynamic";
+const Link = dynamic(() => import("next/link"))
+const ShowHide = dynamic(() => import("./ShowHide"))
 
 const SubMenu = ({ header, data, url }: SubMenuProps) => {
   const [list, setList] = useState(data.short);

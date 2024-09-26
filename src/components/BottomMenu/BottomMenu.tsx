@@ -13,7 +13,6 @@ import dynamic from "next/dynamic";
 import { debounce } from "@/lib/helpers";
 import useMainPage from "@/hooks/useMainPage";
 import useDetailsPage from "@/hooks/useDetailsPage";
-
 const DialogMobileBottom = dynamic(() => import("../Portals/DialogMobileBottom"));
 
 const STARTING_LIST = [...newReleaseLinks, ...topLinks, ...platformLinks, ...genreLinks, ...browseLinks];

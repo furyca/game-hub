@@ -20,7 +20,7 @@ export type BrowseCardProps = {
   type: string;
   image: string | null;
   image_background: string;
-  games: { name: string; added: number }[];
+  games: { name: string; added: number; id: number }[];
   games_count: number;
 };
 

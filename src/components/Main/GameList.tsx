@@ -1,16 +1,17 @@
 "use client";
 import { useCallback, useEffect } from "react";
 import GameCard from "../GameCard/GameCard";
-import Filters from "../Filters/Filters";
-import Masonry from "react-masonry-css";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { useInView } from "react-intersection-observer";
-import LoadMore from "../LoadMore";
 import { createURL } from "../Portals/helpers/createURL";
-import SearchBar from "../Filters/SearchBar";
-import Calendar from "../Filters/Calendar";
 import { breakpointColumnsObj } from "./helpers/columnBreakpoints";
 import { fetchInitialGames, fetchMoreGames, searchMoreGames } from "@/lib/features/data/thunks";
+import dynamic from "next/dynamic";
+const SearchBar = dynamic(() => import("../Filters/SearchBar"))
+const Calendar = dynamic(() => import("../Filters/Calendar"))
+const Filters = dynamic(() => import("../Filters/Filters"))
+const LoadMore = dynamic(() => import("../LoadMore"))
+const Masonry = dynamic(() => import("react-masonry-css"))
 
 const GameList = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);

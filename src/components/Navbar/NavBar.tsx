@@ -5,12 +5,13 @@ import { useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Logo from "./Logo";
 import Search from "./Search";
-import LinkList from "../Portals/LinkList";
 import { useAppDispatch, useAppSelector } from "@/lib/hooks";
 import { setDialog } from "@/lib/features/portals/portalslice";
-import DialogMobileTop from "../Portals/DialogMobileTop";
 import RateTop from "./RateTop";
 import { faBars, faEllipsis } from "@fortawesome/free-solid-svg-icons";
+import dynamic from "next/dynamic";
+const LinkList = dynamic(() => import("../Portals/LinkList"))
+const DialogMobileTop = dynamic(() => import("../Portals/DialogMobileTop"))
 
 const NavBar = () => {
   const [dropdownActive, setDropdownActive] = useState(false);
