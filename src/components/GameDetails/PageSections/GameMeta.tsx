@@ -19,9 +19,9 @@ const GameMeta = () => {
                   key={index}
                   src={`/${icon.icon}`}
                   alt={icon.icon}
-                  className="w-4 h-4"
-                  width={16}
-                  height={16}
+                  width={0}
+                  height={0}
+                  style={{width: icon.detail_scale.width, height: icon.detail_scale.height}}
                 />
               );
             })}

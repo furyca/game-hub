@@ -9,7 +9,7 @@ const Ratings = () => {
   return (
     <>
       <div className="flex justify-center lg:justify-normal">
-        <h2 className="text-2xl font-bold lg:pb-2 tracking-wide">
+        <h2 className="text-2xl leading-tight font-bold lg:pb-2 tracking-wide">
           {rating_top ? getRankProps(rating_top).name : "Not rated yet"}
         </h2>
         <Image

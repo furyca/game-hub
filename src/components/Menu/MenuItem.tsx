@@ -8,22 +8,22 @@ import { useEffect, useState } from "react";
 import useClearSearch from "@/hooks/useClearSearch";
 import { setCalendar } from "@/lib/features/data/dataSlice";
 import dynamic from "next/dynamic";
-const Image = dynamic(() => import("next/image"))
+const Image = dynamic(() => import("next/image"));
 
-const MenuItem = ({ name, title, subTitle, filter, url, icon: { viewBox, d, path } }: MenuItemProps) => {
+const MenuItem = ({ name, title, subTitle, filter, url, icon: { viewBox, d, path, width, height } }: MenuItemProps) => {
   const dispatch = useAppDispatch();
   const { ordering, dates, platform, genres } = filter || {};
   const menuFilters = useMenuFilters({ dates, ordering, platform, genres });
   const { header } = useAppSelector(({ portal }) => portal);
   const { activeQuery } = useAppSelector(({ input }) => input);
   const { clearSearch } = useClearSearch();
-  const [highlight, setHighlight] = useState(header === name);  
+  const [highlight, setHighlight] = useState(header === name);
 
   const handleClick = () => {
     activeQuery && clearSearch();
     filter && menuFilters();
     title && dispatch(setHeader({ header: title, subHeader: subTitle }));
-    dispatch(setCalendar(name === "Release calendar"))
+    dispatch(setCalendar(name === "Release calendar"));
   };
 
   useEffect(() => {
@@ -40,8 +40,13 @@ const MenuItem = ({ name, title, subTitle, filter, url, icon: { viewBox, d, path
         {path ? (
           <Image src={path} alt={path} width={18} height={18} className="h-6 w-6 lg:h-8 lg:w-8" />
         ) : (
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} className="h-[18px] w-[18px]">
-            <path fill="#FFF" d={d} className={`${highlight && "fill-black"} group-hover/menu-link:fill-black`} />
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox={viewBox} style={{ width, height }}>
+            <path
+              fill="#FFF"
+              d={d}
+              className={`${highlight && "fill-black"} group-hover/menu-link:fill-black`}
+              
+            />
           </svg>
         )}
       </span>

@@ -13,26 +13,25 @@ import {
   topLinks,
 } from "@/lists/menuLinks";
 import useMainPage from "@/hooks/useMainPage";
-import { usePathname } from "next/navigation";
+import useDetailsPage from "@/hooks/useDetailsPage";
 
 const Menu = () => {
   const allGamesOpts = useAllGames();
   const handleMainPage = useMainPage();
-  const pathname = usePathname();
-  const isDetails = pathname.startsWith("/games")
+  const isDetails = useDetailsPage();
 
   return (
-    <aside className={`hidden ${isDetails ? "xl:block" : "lg:block"}  sticky top-0 w-[200px] shrink-0 mt-9 mr-5`}>
+    <aside className={`hidden ${isDetails ? "xl:block" : "lg:block"}  sticky -top-[316px] self-start w-[200px] shrink-0 mt-10 mr-5`}>
       <Link
         href="/"
         onClick={handleMainPage}
-        className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+        className="lg:text-2xl lg:font-bold lg:mb-6 block lg:leading-7 transition-all duration-200 hover:opacity-40"
       >
         Home
       </Link>
       <Link
         href=""
-        className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+        className="lg:text-2xl lg:font-bold lg:mb-6 block lg:leading-7 transition-all duration-200 hover:opacity-40"
       >
         Reviews
       </Link>
@@ -41,7 +40,7 @@ const Menu = () => {
       <Link
         href="/"
         onClick={allGamesOpts}
-        className="lg:text-2xl lg:font-bold lg:mb-5 block leading-7 transition-all duration-200 hover:opacity-40"
+        className="lg:text-2xl lg:font-bold lg:mb-6 block lg:leading-7 transition-all duration-200 hover:opacity-40"
       >
         All Games
       </Link>

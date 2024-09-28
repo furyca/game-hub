@@ -10,7 +10,7 @@ import { formatReleaseDate } from "./helpers/formatReleaseDate";
 import { GameProps, GenreProps } from "../Main/types";
 import { useInView } from "react-intersection-observer";
 import dynamic from "next/dynamic";
-const MetacriticRate = dynamic(() => import("../GameDetails/PageSections/MetacriticRate"))
+const MetacriticRate = dynamic(() => import("../GameDetails/PageSections/MetacriticRate"));
 
 const GameCard = memo(({ game }: { game: GameProps }) => {
   const [screenshotState, setScreenshotState] = useState({ show: false, current: 0 });
@@ -36,7 +36,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
   const background = useMemo(
     () =>
       game.background_image
-        ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/resize/640/-/")
+        ? game.background_image.replace("https://media.rawg.io/media/", "https://media.rawg.io/media/crop/600/400/")
         : null,
     [game]
   );
@@ -105,7 +105,7 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
                   alt={game.name}
                   className={`${
                     screenshotState.show ? "hidden" : "block"
-                  } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0`}
+                  } rounded-t-xl w-full h-full bg-[50%] bg-cover bg-no-repeat absolute top-0 left-0 object-cover`}
                 />
               )}
           <div className="absolute right-0 left-0 top-0 w-full h-full px-4 ">
@@ -129,20 +129,19 @@ const GameCard = memo(({ game }: { game: GameProps }) => {
         {/* Bottom of the game card */}
         <div className="p-4">
           <div className="flex justify-between items-center">
-            <div className="flex items-center text-sm gap-1">
+            <div className="flex items-center text-sm gap-[6px]">
               {platforms
                 ?.map((platform, index) => {
                   const platformIcon = platformsIcons.find((platformIcon) => platformIcon.slug === platform);
-
                   if (platformIcon) {
                     return (
                       <Image
                         key={index}
                         src={platformIcon.icon}
                         alt={platformIcon.icon}
-                        className="w-[17px] h-[13px]"
-                        width={17}
-                        height={13}
+                        width={0}
+                        height={0}
+                        style={{ width: platformIcon.card_scale.width, height: platformIcon.card_scale.height }}
                       />
                     );
                   }

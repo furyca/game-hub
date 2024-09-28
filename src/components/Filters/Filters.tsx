@@ -44,7 +44,7 @@ const Filters = () => {
             createPortal(<PortalContainer list={ordersLong} styles={styles(orderRef)} />, document.body)}
         </li>
         <li onClick={() => dispatch(setPortal("date"))} ref={dateRef} className={`${date_name ? "" : "hidden"}`}>
-          <FilterOption span1="Release Date:" span2={date_name || ""} type="date" />
+          <FilterOption span1="Release date" span2={date_name || ""} type="date" />
           {activePortal === "date" &&
             createPortal(
               <PortalContainer

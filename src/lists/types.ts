@@ -19,6 +19,8 @@ export type MenuItemProps = {
   icon: {
     path: string;
     viewBox: string;
+    width: number;
+    height: number;
     d: string;
   };
 };

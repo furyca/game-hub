@@ -28,13 +28,13 @@ const SubMenu = ({ header, data, url }: SubMenuProps) => {
       {url.length > 1 ? (
         <Link
           href={url}
-          className="text-[18px] lg:text-2xl font-bold lg:mb-4 block leading-7 transition-all duration-200 hover:opacity-40"
+          className="text-[18px] lg:text-2xl font-bold lg:mb-4 block lg:leading-7 transition-all duration-200 hover:opacity-40"
           onClick={handleHeadClick}
         >
           {header}
         </Link>
       ) : (
-        <h1 className="text-[18px] lg:text-2xl font-bold lg:mb-4 leading-7">{header}</h1>
+        <h1 className="text-[18px] lg:text-2xl font-bold lg:mb-4 lg:leading-7">{header}</h1>
       )}
       <ul className="lg:mb-6">
         {list.map((item, index) => (
