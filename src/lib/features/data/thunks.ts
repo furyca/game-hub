@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const fetchGames = async (endpoint: string) => {
-  const response = await fetch(endpoint);
+  const response = await fetch(endpoint, {
+    next: { revalidate: 2592000 }, // 30 days
+  });
 
   if (!response.ok) {
     throw new Error("Response error");
@@ -15,9 +17,12 @@ const fetchGames = async (endpoint: string) => {
   };
 };
 
-export const fetchInitialGames = createAsyncThunk("fetchInitialGames", async ({filter, size}: {filter: string ,size: number}) => {
-  return fetchGames(`/api/fetchGames?${filter}&page_size=${size}`);
-});
+export const fetchInitialGames = createAsyncThunk(
+  "fetchInitialGames",
+  async ({ filter, size }: { filter: string; size: number }) => {
+    return fetchGames(`/api/fetchGames?${filter}&page_size=${size}`);
+  }
+);
 
 export const fetchMoreGames = createAsyncThunk(
   "fetchMoreGames",
