@@ -35,7 +35,7 @@ const GameScreenshots = () => {
       )}
 
       <div
-        className="flex items-center flex-col justify-center lg:mt-4 ms-4 rounded-md min-w-[184px] w-[184px] h-auto lg:h-[102px] opacity-30 cursor-pointer group hover:opacity-50"
+        className="flex items-center flex-col justify-center lg:mt-4 ms-4 rounded-md min-w-[184px] w-[184px] h-auto lg:h-[102px] opacity-30 group hover:opacity-50"
         style={{
           background: screenshots.length ? `url(${screenshots[4]}) no-repeat center center/cover` : "/",
         }}
