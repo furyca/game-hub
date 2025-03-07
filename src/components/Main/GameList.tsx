@@ -7,11 +7,11 @@ import { createURL } from "../Portals/helpers/createURL";
 import { breakpointColumnsObj } from "./helpers/columnBreakpoints";
 import { fetchInitialGames, fetchMoreGames, searchMoreGames } from "@/lib/features/data/thunks";
 import dynamic from "next/dynamic";
-const SearchBar = dynamic(() => import("../Filters/SearchBar"))
-const Calendar = dynamic(() => import("../Filters/Calendar"))
-const Filters = dynamic(() => import("../Filters/Filters"))
-const LoadMore = dynamic(() => import("../LoadMore"))
-const Masonry = dynamic(() => import("react-masonry-css"))
+const SearchBar = dynamic(() => import("../Filters/SearchBar"));
+const Calendar = dynamic(() => import("../Filters/Calendar"));
+const Filters = dynamic(() => import("../Filters/Filters"));
+const LoadMore = dynamic(() => import("../LoadMore"));
+const Masonry = dynamic(() => import("react-masonry-css"));
 
 const GameList = () => {
   const { masonry } = useAppSelector(({ visual }) => visual);
@@ -21,9 +21,11 @@ const GameList = () => {
   const { ref, inView } = useInView({ rootMargin: "200px 0px" });
 
   useEffect(() => {
-    //cannot use useWideScreen hook due to timing conflicts and restrictions on the use of window object
-    const mobileView = window.innerWidth < 1024;
-    activeQuery || dispatch(fetchInitialGames({ filter: createURL(filter), size: mobileView ? 5 : 10 }));
+    if (!games.length) {
+      //cannot use useWideScreen hook due to timing conflicts and restrictions on the use of window object
+      const mobileView = window.innerWidth < 1024;
+      activeQuery || dispatch(fetchInitialGames({ filter: createURL(filter), size: mobileView ? 5 : 10 }));
+    }
   }, [filter, dispatch]);
 
   useEffect(() => {
